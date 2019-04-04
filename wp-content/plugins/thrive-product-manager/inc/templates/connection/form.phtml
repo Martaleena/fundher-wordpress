@@ -1,0 +1,65 @@
+<?
+/** @var TPM_Connection $this */
+?>
+<div class="tpm-connect-screen">
+	<div>
+		<h2><?php echo __( 'Connect to ThriveThemes.com to access your product.', Thrive_Product_Manager::T ) ?></h2>
+		<p><?php echo __( 'Click on the button below to be taken to Thrive Themes and simply log into your account to install your product', Thrive_Product_Manager::T ) ?></p>
+		<p><?php echo __( 'Make sure that you use the same username and password that used when signing up at ThriveThemes.com', Thrive_Product_Manager::T ) ?></p>
+
+		<hr class="tpm-le-rule"/>
+
+		<a class="tpm-login" href="<?php echo $this->get_login_url() ?>">
+			<?php echo __( 'Log into my account', Thrive_Product_Manager::T ) ?>
+		</a>
+
+		<p>
+			<a href="https://thrivethemes.com/tkb_item/how-to-use-the-thrive-product-manager/"
+			   target="_blank"><?php echo __( 'See how it works.', Thrive_Product_Manager::T ) ?></a>
+		</p>
+
+	</div>
+</div>
+
+<?php if ( Thrive_Product_Manager::is_debug_mode() ) : ?>
+	<?php
+	$urls = array(
+		'live'     => 'https://thrivethemes.com',
+		'staging1' => 'https://staging.thrivethemes.com',
+		'staging2' => 'https://staging2.thrivethemes.com',
+		'staging3' => 'https://staging3.thrivethemes.com',
+	);
+	?>
+	<h2>Debug mode: ON</h2>
+	<ul>
+		<li>
+			<label for="tpm-debug-server">Hit server</label>:
+			<select id="tpm-debug-server">
+				<?php foreach ( $urls as $name => $url ) : ?>
+					<option <?php echo $url === Thrive_Product_Manager::get_ttw_url() ? 'selected="selected"' : '' ?>
+						value="<?php echo $url ?>"><?php echo $name ?></option>
+				<?php endforeach; ?>
+			</select>
+		</li>
+	</ul>
+<?php endif; ?>
+
+
+<script type="text/javascript">
+
+	( function ( $ ) {
+
+		$( function () {
+
+			var $list = $( '#tpm-debug-server' );
+
+			$list.change( function () {
+				window.location = TPM.tpm_url + '&tpm_action=set_url&url=' + this.value;
+			} );
+
+		} );
+
+
+	} )( jQuery );
+
+</script>

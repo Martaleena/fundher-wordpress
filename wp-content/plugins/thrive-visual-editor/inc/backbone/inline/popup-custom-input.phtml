@@ -1,0 +1,20 @@
+<# _.each(shortcode.input, function(input, key) { #>
+	<#if(input.type == 'select'){#>
+		<label for="fr-dropdown-list-<#= key #>"><#= input.label #></label>
+		<select name="<#= key #>" class="fr-custom-input <#= input.info? '': 'fr-input-line' #>" id="fr-dropdown-list-<#= key #>">
+			<# _.each(input.value, function(option, option_key) { #>
+			<option value="<#= option_key #>" <#= Number(selected[key]) == option_key? 'selected="selected"':'' #>><#= option #></option>
+			<# }); #>
+		</select>
+	<#}#>
+	<#if(input.type == 'input'){#>
+		<label for="fr-dropdown-list-<#= key #>"><#= input.label #></label>
+		<input name="<#= key #>" class="fr-custom-input <#= input.info? '': 'fr-input-line' #>" id="fr-dropdown-list-<#= key #>" value="<#= selected[key]? selected[key]:input.value #>"/>
+	<#}#>
+	<#if( input.info ){#>
+		<a href="https://codex.wordpress.org/Formatting_Date_and_Time" class="info-text fr-input-line" target="_blank">
+			<?php echo tcb_icon( 'info' ) ?>
+			<#= input.info #>
+		</a>
+	<#}#>
+<# }); #>

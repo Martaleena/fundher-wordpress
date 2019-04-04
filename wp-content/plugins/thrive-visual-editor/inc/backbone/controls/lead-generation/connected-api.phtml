@@ -1,0 +1,28 @@
+<div class="control-grid">
+	<div class="label fixed-50 mr-10 pr-5 api-image-container">
+		<div class="api-image" style="background-image: url('<#= this.model.logo() #>');"></div>
+	</div>
+	<div class="input fill">
+		<div class="api-name">
+			<#= TVE.ucFirst(this.model.get('name')) #>
+		</div>
+		<div class="control-grid pb-5 pt-5 left-align">
+			<a type="button" class="button-link mr-10 click" data-fn="edit" data-api="<#= this.model.get('key') #>">
+				<span>
+					<?php tcb_icon( 'pen-regular' ); ?>
+				</span>
+				<span>
+					<?php echo __( 'Edit', 'thrive-cb' ); ?>
+				</span>
+			</a>
+			<a type="button" class="button-link click" data-fn="disconnect" data-api="<#= this.model.get('key') #>">
+				<span>
+					<?php tcb_icon( 'ban-light' ); ?>
+				</span>
+				<span>
+					<?php echo __( 'Disconnect', 'thrive-cb' ); ?>
+				</span>
+			</a>
+		</div>
+	</div>
+</div>

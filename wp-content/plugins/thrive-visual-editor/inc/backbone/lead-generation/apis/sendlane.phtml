@@ -1,0 +1,36 @@
+<div class="api-field">
+	<div class="field-description">
+		<?php echo __( 'Choose your mailing list', 'thrive-cb' ); ?>
+	</div>
+
+	<div class="row">
+		<div class="col-xs-9">
+            <select class="api-list change" data-fn="setupChange" data-name="list">
+                <# if ( api.get('lists').length == 0 ) { #>
+                    <#= TVE.tpl( 'util/option', {value:0, selected: true, text: '<?php echo __( 'No lists found', 'thrive-cb' ); ?>'}) #>
+                <# } #>
+
+				<# _.each(api.get('lists'), function(item) { #>
+                    <#= TVE.tpl( 'util/option', {value:item.id, selected: (api.getConfig('list')==item.id), text: item.name}) #>
+				<# } ) #>
+			</select>
+		</div>
+
+		<div class="col-xs-3">
+			<button type="button" class="button-link blue tcb-right click" data-fn="forceGet">
+				<?php echo __( 'Reload Lists', 'thrive-cb' ); ?>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="api-field">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="tvd-input-field">
+                <input id="sendlane_tags" type="text" class="tve-api-extra" name="tags" placeholder="<?php echo __( 'Create a new tag', 'thrive-cb' ); ?>" value="<#= api.getConfig('tags') ? api.getConfig('tags') : '' #>"/>
+                <label for="sendlane_tags"><?php echo __( 'Tags', 'thrive-cb' ) ?></label>
+            </div>
+        </div>
+    </div>
+    <div class="field-description"><?php echo __( 'Comma-separated lists of tags to assign to a new contact in SendLane', 'thrive-cb' ); ?></div>
+</div>

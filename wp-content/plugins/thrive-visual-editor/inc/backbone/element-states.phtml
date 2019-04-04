@@ -1,0 +1,17 @@
+<div class="state-section">
+	<a href="javascript:void(0)" class="mousedown state-switch" data-fn="toggle_dropdown">
+		<span class="label"><?php echo __( 'State:', 'thrive-cb' ); ?></span>
+		<strong class="state-action">
+			<span class="current-state"><?php echo __( 'Normal', 'thrive-cb' ); ?></span>
+			<span class="chevron"><?php tcb_icon( 'chevron-down-regular' ); ?></span>
+		</strong>
+	</a>
+	<ul class="drop-content tcb-hidden">
+		<li class="selected" data-state="default">
+			<a href="javascript:void(0)" class="mousedown" data-state="default" data-fn="done"><?php echo __( 'Normal', 'thrive-cb' ) ?></a>
+		</li>
+		<li data-state="hover">
+			<a href="javascript:void(0)" class="mousedown" data-state="hover" data-fn="state_select"><?php echo __( 'Hover', 'thrive-cb' ) ?></a>
+		</li>
+	</ul>
+</div>

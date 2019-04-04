@@ -1,0 +1,33 @@
+<div id="tpm-app"></div>
+<?php if ( Thrive_Product_Manager::is_debug_mode() ) : ?>
+	<ul>
+		<li>
+			<b>TTW URL</b>: <?php echo Thrive_Product_Manager::get_ttw_url() ?>
+		</li>
+		<li>
+			<b>DEBUG MODE</b>: <?php echo Thrive_Product_Manager::is_debug_mode() ? 'true' : 'false' ?>
+		</li>
+		<li>
+			<b>CONNECTED</b>
+			as: <?php echo TPM_Connection::get_instance()->is_connected() ? var_export( TPM_Connection::get_instance()->get_data(), true ) : 'not connected' ?>
+		</li>
+		<li>
+			<b>OLD way thrive_license</b>: <?php echo var_export( get_option( 'thrive_license', array() ), true ) ?>
+		</li>
+		<li>
+			<b>NEW way tpm_licenses</b>: <?php echo var_export( get_option( 'tpm_licenses', array() ), true ) ?>
+		</li>
+		<li>
+			<b>CACHE enabled</b>: <?php echo Thrive_Product_Manager::CACHE_ENABLED ? 'true' : 'false' ?>
+		</li>
+		<li>
+			<b>CACHE life time for products</b> <?php echo TPM_Product_List::CACHE_LIFE_TIME ?> seconds <br>
+		</li>
+		<li>
+			<b>CACHE life time for licenses</b> <?php echo TPM_License_Manager::CACHE_LIFE_TIME ?> seconds
+		</li>
+		<li>
+			<b>TPM Token</b> <?php echo get_option( 'tpm_token', 'not_set' ) ?> seconds
+		</li>
+	</ul>
+<?php endif; ?>
