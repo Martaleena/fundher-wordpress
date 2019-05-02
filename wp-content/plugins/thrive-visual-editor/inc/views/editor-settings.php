@@ -16,10 +16,11 @@
 
 </div>
 <div class="side save">
-	<a href="javascript:void(0)" class="save-btn click" data-fn="save">
+	<a href="javascript:void(0)" class="save-btn click save" data-fn="save">
 		<span class="txt"><?php echo __( 'Save work', 'thrive-cb' ); ?></span>
 		<span class="drop click" data-fn="click_save_arrow"><?php tcb_icon( 'chevron-up-regular' ); ?></span>
 	</a>
+	<a href="javascript:void(0)" class="save-btn click edit-mode p-0 tve-button orange" data-fn="f:main.EditMode.exit"><?php echo __( 'DONE', 'thrive-cb' ); ?></a>
 </div>
 
 <div class="save-options">

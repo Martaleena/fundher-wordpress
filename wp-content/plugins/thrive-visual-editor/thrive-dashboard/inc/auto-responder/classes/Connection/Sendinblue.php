@@ -189,11 +189,15 @@ class Thrive_Dash_List_Connection_Sendinblue extends Thrive_Dash_List_Connection
 		$merge_tags = array(
 			'NAME'    => $first_name,
 			'SURNAME' => $last_name,
+			'VORNAME' => $last_name,
 		);
 
 		if ( ! empty( $arguments['phone'] ) ) {
-			// Added abs here because SendinBlue does not accept phone numbers starting with 0
-			$merge_tags['SMS'] = ltrim( ( preg_replace( '/[^0-9]/', '', $arguments['phone'] ) ), '0' );
+			// SendinBlue does not accept phone numbers starting with 0 or other special chars
+			$the_phone             = ltrim( ( preg_replace( '/[^0-9]/', '', $arguments['phone'] ) ), '0' );
+			$merge_tags['SMS']     = $the_phone;
+			$merge_tags['PHONE']   = $the_phone;
+			$merge_tags['TELEFON'] = $the_phone;
 		}
 
 		$data = array(

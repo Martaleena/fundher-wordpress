@@ -1,0 +1,25 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+<div>
+	<div>
+		<i><#= model.get('icon') #></i>
+		<span><#= model.get('name') #></span>
+		<span><#= TVE_Dash.upperFirst( TVD_SS.util.get_field_type_name( parseInt( this.model.get( 'type' ) ) ) ) #></span>
+		<span><#= Object.entries(model.get('formated_data')).length === 0 ? 'Not Set' : model.get('formated_data') #></span>
+	</div>
+	<div class="tvd-tss-collapse-actions">
+		<a class="tvd-tss-edit-field" href="javascript:void(0)"><i class="tvd-icon-pencil"></i></a>
+		<!--<a class="tvd-tss-delete-field <#= parseInt(model.get('is_default')) === 1 ? 'tvd-disabled' : '' #>"  href="javascript:void(0)"><i class="tvd-icon-trash-o"</a>-->
+		<a class="tvd-tss-delete-field <#= model.get('default_field')? 'tvd-disabled':'' #>" href="javascript:void(0)"><i class="tvd-icon-trash-o"></i></a>
+	</div>
+</div>
+

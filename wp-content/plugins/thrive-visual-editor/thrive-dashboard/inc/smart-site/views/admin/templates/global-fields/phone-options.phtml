@@ -1,0 +1,19 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Phone Number', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-phone" class="input-change" type="number" value="<#= model.get('data').phone ? model.get('data').phone : '' #>" data-field="data_phone" placeholder="<?php echo __( '00441793522304', TVE_DASH_TRANSLATE_DOMAIN ) ?>">
+		<label for="tvd-tss-field-phone"><?php echo __( 'Phone Number', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>

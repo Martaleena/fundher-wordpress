@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="tcb-notification-icon tcb-notification-icon-error">
 				<?php tcb_icon( 'close2' ) ?>
 			</div>
-			<div class="tcb-notification-text">
+			<div class="tcb-notification-content">
 				<div>
 					<?php echo sprintf( __( 'An error was encountered while fetching Cloud Landing Page Templates. Please contact our %s and provide the following error message:', 'thrive-cb' ), $support_link ) ?>
 					<pre style="color: #e74c3c"><?php echo esc_html( $GLOBALS['tcb_lp_cloud_error'] ) ?></pre>

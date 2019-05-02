@@ -480,7 +480,11 @@ if ( ! class_exists( 'TCB_Editor_Ajax' ) ) {
 						'tags'             => $this->param( 'template_tags' ),
 						'template'         => $landing_page_template,
 						'theme_dependency' => get_post_meta( $post_id, 'tve_disable_theme_dependency', true ),
-						'set'              => get_post_meta( $post_id, 'tve_landing_set', true ),
+						'tpl_colours'      => get_post_meta( $post_id, 'thrv_lp_template_colours', true ),
+						'tpl_gradients'    => get_post_meta( $post_id, 'thrv_lp_template_gradients', true ),
+						'tpl_button'       => get_post_meta( $post_id, 'thrv_lp_template_button', true ),
+						'tpl_section'      => get_post_meta( $post_id, 'thrv_lp_template_section', true ),
+						'tpl_contentbox'   => get_post_meta( $post_id, 'thrv_lp_template_contentbox', true ),
 						'date'             => date( 'Y-m-d' ),
 					);
 					/**
@@ -944,7 +948,7 @@ if ( ! class_exists( 'TCB_Editor_Ajax' ) ) {
 				$this->error( 'Invalid Type!' );
 			}
 
-			if ( strpos( $identifier, 'set_' ) !== false ) {
+			if ( strpos( $identifier, 'tpl_' ) !== false ) {
 
 				$post_id = intval( $this->param( 'post_id' ) );
 

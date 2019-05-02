@@ -207,7 +207,6 @@ class Thrive_Dash_List_Connection_MailPoet extends Thrive_Dash_List_Connection_A
 				$mailpoet            = new \MailPoet\API\API();
 				$errors              = array();
 				$subscriber          = array();
-				$user_data['status'] = 'subscribed'; // Set status subscribed
 
 				// Get subscriber
 				try {

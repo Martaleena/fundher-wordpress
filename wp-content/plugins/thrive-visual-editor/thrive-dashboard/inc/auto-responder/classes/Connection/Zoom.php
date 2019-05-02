@@ -110,7 +110,7 @@ class Thrive_Dash_List_Connection_Zoom extends Thrive_Dash_List_Connection_Abstr
 		}
 
 		try {
-			$this->getApi()->register_to_webinar( $arguments['zoom_webinar'], $args );
+			$this->getApi()->register_to_webinar( ! empty( $arguments['zoom_webinar'] ) ? $arguments['zoom_webinar'] : $list_identifier, $args );
 		} catch ( Exception $e ) {
 			return $this->error( $e->getMessage() );
 		}

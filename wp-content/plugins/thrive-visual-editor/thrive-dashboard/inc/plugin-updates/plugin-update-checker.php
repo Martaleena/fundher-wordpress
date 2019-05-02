@@ -865,7 +865,19 @@ if ( ! class_exists( 'TVE_PluginUpdate_1_3', false ) ) {
 		public $homepage;
 		public $download_url;
 		public $upgrade_notice;
-		private static $fields = array( 'id', 'slug', 'version', 'homepage', 'download_url', 'upgrade_notice' );
+		public $tested;
+		public $icons;
+		private static $fields
+			= array(
+				'id',
+				'slug',
+				'version',
+				'homepage',
+				'download_url',
+				'upgrade_notice',
+				'tested',
+				'icons',
+			);
 
 		/**
 		 * Create a new instance of PluginUpdate from its JSON-encoded representation.
@@ -910,7 +922,9 @@ if ( ! class_exists( 'TVE_PluginUpdate_1_3', false ) ) {
 		public static function fromObject( $object ) {
 			$update = new self();
 			foreach ( self::$fields as $field ) {
-				$update->$field = $object->$field;
+				if ( isset( $object->$field ) ) {
+					$update->$field = $object->$field;
+				}
 			}
 
 			return $update;
@@ -947,6 +961,15 @@ if ( ! class_exists( 'TVE_PluginUpdate_1_3', false ) ) {
 			$update->new_version = $this->version;
 			$update->url         = $this->homepage;
 			$update->package     = $this->download_url;
+
+			if ( ! empty( $this->tested ) ) {
+				$update->tested = $this->tested;
+			}
+
+			if ( ! empty( $this->icons ) ) {
+				$update->icons = $this->icons;
+			}
+
 			if ( ! empty( $this->upgrade_notice ) ) {
 				$update->upgrade_notice = $this->upgrade_notice;
 			}

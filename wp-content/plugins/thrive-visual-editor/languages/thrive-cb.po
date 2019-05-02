@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: thrive-content-builder 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-20 12:34+0000\n"
+"POT-Creation-Date: 2019-04-12 09:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,22 +123,22 @@ msgstr ""
 #: admin/includes/class-tcb-symbols-rest-controller.php:88
 #: admin/includes/class-tcb-symbols-rest-controller.php:139
 #: admin/includes/class-tcb-symbols-rest-controller.php:148
-#: inc/classes/class-tcb-editor-ajax.php:1146
-#: inc/classes/class-tcb-editor-ajax.php:1151
-#: inc/classes/class-tcb-editor-ajax.php:1173
-#: inc/classes/class-tcb-editor-ajax.php:1195
-#: inc/classes/class-tcb-editor-ajax.php:1204
-#: inc/classes/class-tcb-editor-ajax.php:1227
-#: inc/classes/class-tcb-editor-ajax.php:1263
-#: inc/classes/class-tcb-editor-ajax.php:1289
-#: inc/classes/class-tcb-editor-ajax.php:1337
-#: inc/classes/class-tcb-editor-ajax.php:1374
+#: inc/classes/class-tcb-editor-ajax.php:1150
+#: inc/classes/class-tcb-editor-ajax.php:1155
+#: inc/classes/class-tcb-editor-ajax.php:1177
+#: inc/classes/class-tcb-editor-ajax.php:1199
+#: inc/classes/class-tcb-editor-ajax.php:1208
+#: inc/classes/class-tcb-editor-ajax.php:1231
+#: inc/classes/class-tcb-editor-ajax.php:1267
+#: inc/classes/class-tcb-editor-ajax.php:1293
+#: inc/classes/class-tcb-editor-ajax.php:1341
+#: inc/classes/class-tcb-editor-ajax.php:1378
 msgid "Invalid element type"
 msgstr ""
 
 #: admin/includes/class-tcb-symbols-rest-controller.php:143
-#: inc/classes/class-tcb-editor-ajax.php:1199
-#: inc/classes/class-tcb-editor-ajax.php:1231
+#: inc/classes/class-tcb-editor-ajax.php:1203
+#: inc/classes/class-tcb-editor-ajax.php:1235
 msgid "Missing template id"
 msgstr ""
 
@@ -473,14 +473,14 @@ msgstr ""
 #: admin/includes/views/templates/modals/move-symbol.phtml:32
 #: admin/includes/views/templates/modals/new-category.phtml:18
 #: admin/includes/views/templates/modals/section-modal-create-step-1.phtml:37
-#: inc/backbone/modals/cf-settings.php:10 inc/i18n.php:174
-#: inc/views/modals/cf-error-messages.php:17
+#: inc/backbone/modals/cf-settings.php:9 inc/i18n.php:174
+#: inc/views/modals/cf-error-messages.php:14
 #: inc/views/modals/fancy-divider.php:17
-#: inc/views/modals/lg-error-messages.php:38 inc/views/modals/menu.php:54
+#: inc/views/modals/lg-error-messages.php:31 inc/views/modals/menu.php:53
 #: inc/views/modals/save-elements.php:50
 #: inc/backbone/controls/drop-panel-light.phtml:6
 #: inc/backbone/controls/drop-panel.phtml:6
-#: inc/backbone/page-events/form.phtml:24
+#: inc/backbone/page-events/form.phtml:21
 #: inc/backbone/symbols/sections-container.phtml:45
 msgid "Cancel"
 msgstr ""
@@ -518,15 +518,15 @@ msgstr ""
 #: admin/includes/views/templates/modals/move-category.phtml:36
 #: admin/includes/views/templates/modals/move-symbol.phtml:36
 #: admin/includes/views/templates/modals/new-category.phtml:22
-#: inc/views/modals/cf-error-messages.php:22
+#: inc/views/modals/cf-error-messages.php:17
 #: inc/views/modals/custom-html.php:15
-#: inc/views/modals/lg-error-messages.php:43
+#: inc/views/modals/lg-error-messages.php:34
 #: inc/views/modals/save-elements.php:54
 #: inc/views/modals/wordpress-content.php:19
 #: inc/backbone/lead-generation/submit-options.phtml:30
-#: inc/backbone/page-events/actions/lightbox.phtml:22
-#: inc/backbone/page-events/actions/lightbox.phtml:48
-#: inc/backbone/page-events/form.phtml:50
+#: inc/backbone/page-events/actions/lightbox.phtml:19
+#: inc/backbone/page-events/actions/lightbox.phtml:44
+#: inc/backbone/page-events/form.phtml:41
 msgid "Save"
 msgstr ""
 
@@ -599,7 +599,7 @@ msgstr ""
 #: admin/includes/views/templates/modals/section-modal-create-step-2.phtml:13
 #: inc/backbone/lead-generation/fields.phtml:37
 #: inc/backbone/lead-generation/submit-options.phtml:25
-#: inc/backbone/page-events/form.phtml:47
+#: inc/backbone/page-events/form.phtml:40
 #: inc/backbone/symbols/create-item.phtml:13
 msgid "Back"
 msgstr ""
@@ -1079,9 +1079,21 @@ msgstr ""
 msgid "Email & after submit setup"
 msgstr ""
 
-#: inc/backbone/modals/cf-settings.php:15
+#: inc/backbone/modals/cf-settings.php:12
 #: inc/backbone/lead-generation/fields.phtml:42
 msgid "Next"
+msgstr ""
+
+#: inc/backbone/notification-box/error-save.php:5
+msgid "Unable to complete action"
+msgstr ""
+
+#: inc/backbone/notification-box/error-save.php:8
+msgid "How to fix"
+msgstr ""
+
+#: inc/backbone/notification-box/error-save.php:13
+msgid "Error code:"
 msgstr ""
 
 #: inc/classes/class-tcb-cloud-template-element-abstract.php:50
@@ -1296,39 +1308,39 @@ msgstr ""
 msgid "All changes saved."
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:663
+#: inc/classes/class-tcb-editor-ajax.php:667
 msgid "Content template deleted"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:673
-#: inc/classes/class-tcb-editor-ajax.php:688
+#: inc/classes/class-tcb-editor-ajax.php:677
+#: inc/classes/class-tcb-editor-ajax.php:692
 msgid "Invalid Post Parameter"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:801
+#: inc/classes/class-tcb-editor-ajax.php:805
 msgid "Invalid Parameters! A color must contain a name and a color string!"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:1120
+#: inc/classes/class-tcb-editor-ajax.php:1124
 msgid "Lightbox created"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:1271
+#: inc/classes/class-tcb-editor-ajax.php:1275
 #: inc/classes/class-tcb-symbol-element-abstract.php:154
 msgid "Error when retrieving symbols"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:1304
+#: inc/classes/class-tcb-editor-ajax.php:1308
 msgid "Missing symbol title"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:1332
+#: inc/classes/class-tcb-editor-ajax.php:1336
 #: inc/classes/class-tcb-symbol-element-abstract.php:277
 #: inc/classes/class-tcb-symbol-element-abstract.php:374
 msgid "Missing symbol id"
 msgstr ""
 
-#: inc/classes/class-tcb-editor-ajax.php:1369
+#: inc/classes/class-tcb-editor-ajax.php:1373
 msgid "Missing preview file"
 msgstr ""
 
@@ -1421,7 +1433,6 @@ msgstr ""
 #: inc/classes/elements/class-tcb-countdown-element.php:74
 #: inc/classes/elements/class-tcb-countdownevergreen-element.php:71
 #: inc/classes/elements/class-tcb-credit-element.php:99
-#: inc/classes/elements/class-tcb-divider-element.php:83
 #: inc/classes/elements/class-tcb-form-submit-element.php:121
 #: inc/classes/elements/class-tcb-lead-generation-submit-element.php:110
 #: inc/classes/elements/class-tcb-rating-element.php:80
@@ -1924,7 +1935,7 @@ msgstr ""
 #: inc/classes/elements/class-tcb-credit-element.php:77
 #: inc/classes/elements/class-tcb-icon-element.php:67
 #: inc/classes/elements/class-tcb-image-element.php:79
-#: inc/classes/elements/class-tcb-lead-generation-element.php:119
+#: inc/classes/elements/class-tcb-lead-generation-element.php:110
 #: inc/classes/elements/class-tcb-rating-element.php:93
 #: inc/classes/elements/class-tcb-social-element.php:113
 #: inc/backbone/controls/contact-form/edit-cf-item.phtml:46
@@ -1957,27 +1968,31 @@ msgstr ""
 msgid "Fill"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-divider-element.php:76
+#: inc/classes/elements/class-tcb-divider-element.php:79
 msgid "Thickness"
 msgstr ""
 
 #: inc/classes/elements/class-tcb-divider-element.php:86
+msgid "Choose Divider Style"
+msgstr ""
+
+#: inc/classes/elements/class-tcb-divider-element.php:89
 msgid "Solid"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-divider-element.php:90
+#: inc/classes/elements/class-tcb-divider-element.php:93
 msgid "Dotted"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-divider-element.php:94
+#: inc/classes/elements/class-tcb-divider-element.php:97
 msgid "Dashed Slim"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-divider-element.php:98
+#: inc/classes/elements/class-tcb-divider-element.php:101
 msgid "Dashed Thick"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-divider-element.php:102
+#: inc/classes/elements/class-tcb-divider-element.php:105
 msgid "Starred"
 msgstr ""
 
@@ -2092,7 +2107,7 @@ msgid "Icon"
 msgstr ""
 
 #: inc/classes/elements/class-tcb-image-element.php:23
-#: inc/classes/elements/class-tcb-lead-generation-element.php:107
+#: inc/classes/elements/class-tcb-lead-generation-element.php:98
 #: inc/i18n.php:20 inc/backbone/controls/background-image.phtml:1
 #: inc/backbone/controls/social/pin-share.phtml:5
 msgid "Image"
@@ -2257,45 +2272,45 @@ msgstr ""
 msgid "Lead Generation"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:79
+#: inc/classes/elements/class-tcb-lead-generation-element.php:70
 msgid "Add Captcha to prevent spam signups"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:87
+#: inc/classes/elements/class-tcb-lead-generation-element.php:78
 msgid "Theme"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:91
+#: inc/classes/elements/class-tcb-lead-generation-element.php:82
 #: inc/backbone/controls/contact-form/edit-cf-item.phtml:61
 msgid "Light"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:95
+#: inc/classes/elements/class-tcb-lead-generation-element.php:86
 #: inc/backbone/controls/contact-form/edit-cf-item.phtml:62
 msgid "Dark"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:103
+#: inc/classes/elements/class-tcb-lead-generation-element.php:94
 #: inc/classes/elements/class-tcb-social-element.php:91
 msgid "Type"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:111
+#: inc/classes/elements/class-tcb-lead-generation-element.php:102
 msgid "Audio"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:123
+#: inc/classes/elements/class-tcb-lead-generation-element.php:114
 #: inc/backbone/controls/contact-form/edit-cf-item.phtml:50
 #: inc/backbone/element-states.phtml:5 inc/backbone/element-states.phtml:11
 msgid "Normal"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:127
+#: inc/classes/elements/class-tcb-lead-generation-element.php:118
 #: inc/backbone/controls/contact-form/edit-cf-item.phtml:51
 msgid "Compact"
 msgstr ""
 
-#: inc/classes/elements/class-tcb-lead-generation-element.php:135
+#: inc/classes/elements/class-tcb-lead-generation-element.php:126
 msgid "Enable Checkbox for explicit consent"
 msgstr ""
 
@@ -3035,75 +3050,75 @@ msgid ""
 "clean permalinks\"%s option"
 msgstr ""
 
-#: inc/functions.php:260 inc/functions.php:559
+#: inc/functions.php:260 inc/functions.php:564
 msgid "Edit with Thrive Architect"
 msgstr ""
 
-#: inc/functions.php:570
+#: inc/functions.php:575
 msgid "Close Thrive Architect"
 msgstr ""
 
-#: inc/functions.php:685 inc/functions.php:739
+#: inc/functions.php:689 inc/functions.php:743
 msgid "Continue Reading"
 msgstr ""
 
-#: inc/functions.php:2118
+#: inc/functions.php:2122
 msgid ""
 "Thrive Leads Shortcode could not be rendered, please check it in Thrive "
 "Leads Section!"
 msgstr ""
 
-#: inc/functions.php:2904
+#: inc/functions.php:2909
 msgid "Thrive Architect Content"
 msgstr ""
 
-#: inc/functions.php:2905
+#: inc/functions.php:2910
 msgid "Thrive Architect Custom CSS"
 msgstr ""
 
-#: inc/functions.php:2906
+#: inc/functions.php:2911
 msgid "Landing Page"
 msgstr ""
 
-#: inc/functions.php:3189
+#: inc/functions.php:3193
 #, php-format
 msgid "Only %s files are accepted"
 msgstr ""
 
-#: inc/functions.php:3258
+#: inc/functions.php:3262
 msgid "Please prove you are not a robot!!!"
 msgstr ""
 
-#: inc/functions.php:3265
+#: inc/functions.php:3269
 msgid "The email address is required"
 msgstr ""
 
-#: inc/functions.php:3271
+#: inc/functions.php:3275
 msgid "The email address is invalid"
 msgstr ""
 
-#: inc/functions.php:3306
+#: inc/functions.php:3310
 msgid "User consent is required"
 msgstr ""
 
-#: inc/functions.php:3324
+#: inc/functions.php:3328
 msgid "No connection for this form"
 msgstr ""
 
-#: inc/functions.php:3475
+#: inc/functions.php:3479
 msgid "All categories"
 msgstr ""
 
-#: inc/functions.php:3604
+#: inc/functions.php:3608
 msgid "M j, Y @ G:i"
 msgstr ""
 
-#: inc/functions.php:3606
+#: inc/functions.php:3610
 #, php-format
 msgid "%s ago"
 msgstr ""
 
-#: inc/functions.php:3810
+#: inc/functions.php:3814
 msgid "Copy"
 msgstr ""
 
@@ -3555,7 +3570,7 @@ msgid ""
 msgstr ""
 
 #: inc/i18n.php:175 inc/backbone/page-events/actions/lightbox.phtml:16
-#: inc/backbone/page-events/actions/lightbox.phtml:42
+#: inc/backbone/page-events/actions/lightbox.phtml:38
 msgid "Create new lightbox"
 msgstr ""
 
@@ -3990,7 +4005,7 @@ msgid "Inherit Theme Font"
 msgstr ""
 
 #: inc/i18n.php:299
-msgid "This Element is not found inside this page."
+msgid "There aren't any instances on this page"
 msgstr ""
 
 #: inc/i18n.php:300
@@ -4116,6 +4131,30 @@ msgstr ""
 msgid "Save as global gradient"
 msgstr ""
 
+#: inc/i18n.php:332
+msgid ""
+"The action could not be finished because the plugin \"WordFence\" blocked "
+"the request. Set your WordFence Firewall to \"Learning Mode\" and try again."
+msgstr ""
+
+#: inc/i18n.php:333
+msgid "The action could not be finished because it was forbidden."
+msgstr ""
+
+#: inc/i18n.php:334
+msgid "The action could not be finished because the URL could not be found."
+msgstr ""
+
+#: inc/i18n.php:335
+msgid "The action could not be finished because of a fatal server error."
+msgstr ""
+
+#: inc/i18n.php:336
+msgid ""
+"The action could not be finished because your session expired and you are no "
+"longer logged in. Log in using the form below in order to continue."
+msgstr ""
+
 #: inc/license_notice.php:11
 #, php-format
 msgid "You need to %s before you can use the editor!"
@@ -4230,7 +4269,7 @@ msgstr ""
 msgid "Edit as Symbol"
 msgstr ""
 
-#: inc/menu/ct_symbol.php:28 inc/menu/symbol.php:29
+#: inc/menu/ct_symbol.php:28 inc/menu/symbol.php:25
 msgid "Unlink"
 msgstr ""
 
@@ -4396,16 +4435,15 @@ msgstr ""
 msgid "Image Effects"
 msgstr ""
 
-#: inc/menu/lead_generation.php:21 inc/views/sidebars/lead-generation.php:2
+#: inc/menu/lead_generation.php:21
 msgid "You are now in Form Components Mode."
 msgstr ""
 
-#: inc/menu/lead_generation.php:22 inc/views/sidebars/lead-generation.php:2
+#: inc/menu/lead_generation.php:22
 msgid "Select a form component to edit it."
 msgstr ""
 
-#: inc/menu/lead_generation.php:25 inc/views/sidebars/edit-mode.php:4
-#: inc/views/sidebars/lead-generation.php:3
+#: inc/menu/lead_generation.php:25
 msgid "Exit Edit Mode"
 msgstr ""
 
@@ -4469,7 +4507,7 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#: inc/menu/symbol.php:23
+#: inc/menu/symbol.php:22
 msgid "Edit as Symbol "
 msgstr ""
 
@@ -4686,41 +4724,45 @@ msgstr ""
 msgid "No Element Selected"
 msgstr ""
 
-#: inc/views/control-panel.php:25
+#: inc/views/control-panel.php:29
 msgid ""
 "Select or add an element on the<br>canvas in order to activate this sidebar."
 msgstr ""
 
-#: inc/views/control-panel.php:40
+#: inc/views/control-panel.php:44
 msgid ""
 "You can migrate this element to Thrive Architect. Click the following button "
 "to migrate the element"
 msgstr ""
 
-#: inc/views/control-panel.php:41
+#: inc/views/control-panel.php:45
 msgid "Migrate element"
 msgstr ""
 
-#: inc/views/control-panel.php:47
+#: inc/views/control-panel.php:51
 msgid ""
 "Multiple selection mode activated. You can now move the selected elements "
 "across the page."
 msgstr ""
 
-#: inc/views/control-panel.php:53
+#: inc/views/control-panel.php:57
 msgid "Exit mode"
 msgstr ""
 
-#: inc/views/control-panel.php:68
+#: inc/views/control-panel.php:72
 msgid "Expand panel"
 msgstr ""
 
-#: inc/views/control-panel.php:69
+#: inc/views/control-panel.php:73
 msgid "Collapse panel"
 msgstr ""
 
 #: inc/views/editor-settings.php:20
 msgid "Save work"
+msgstr ""
+
+#: inc/views/editor-settings.php:23 inc/backbone/util/edit-mode.phtml:7
+msgid "DONE"
 msgstr ""
 
 #: inc/views/elements/contact_form.php:41
@@ -4978,8 +5020,8 @@ msgstr ""
 msgid "Set error message"
 msgstr ""
 
-#: inc/views/modals/cf-error-messages.php:9
-#: inc/views/modals/lg-error-messages.php:9
+#: inc/views/modals/cf-error-messages.php:8
+#: inc/views/modals/lg-error-messages.php:8
 msgid "Restore errors to default"
 msgstr ""
 
@@ -5048,11 +5090,11 @@ msgstr ""
 msgid "Select"
 msgstr ""
 
-#: inc/views/modals/lg-error-messages.php:19
+#: inc/views/modals/lg-error-messages.php:16
 msgid "Add 'Signup failed' error message"
 msgstr ""
 
-#: inc/views/modals/lg-error-messages.php:25
+#: inc/views/modals/lg-error-messages.php:20
 msgid ""
 "This error message is shown in the rare case that the signup fails. This can "
 "happen when your connected email marketing service can't be reached."
@@ -5147,7 +5189,7 @@ msgid ""
 "constraints."
 msgstr ""
 
-#: inc/views/modals/menu.php:57 inc/views/modals/no-content-templates.php:9
+#: inc/views/modals/menu.php:54 inc/views/modals/no-content-templates.php:9
 msgid "Done"
 msgstr ""
 
@@ -5168,7 +5210,7 @@ msgstr ""
 #: inc/views/modals/options-post-types.php:33
 #: inc/backbone/lead-generation/edit-api-card.phtml:11
 #: inc/backbone/lead-generation/form.phtml:11
-#: inc/backbone/page-events/form.phtml:27
+#: inc/backbone/page-events/form.phtml:22
 msgid "Continue"
 msgstr ""
 
@@ -5371,11 +5413,6 @@ msgstr ""
 
 #: inc/views/sidebar-right.php:74
 msgid "Search setting..."
-msgstr ""
-
-#: inc/views/sidebars/edit-mode.php:3
-#, php-format
-msgid "Currently editing %s"
 msgstr ""
 
 #: inc/views/sidebars/post-grid-edit-grid-options.php:11
@@ -6195,16 +6232,16 @@ msgstr ""
 msgid "Select the Thrive Lightbox to be displayed"
 msgstr ""
 
-#: inc/backbone/page-events/actions/lightbox.phtml:19
-#: inc/backbone/page-events/actions/lightbox.phtml:45
+#: inc/backbone/page-events/actions/lightbox.phtml:18
+#: inc/backbone/page-events/actions/lightbox.phtml:41
 msgid "Lightbox title"
 msgstr ""
 
-#: inc/backbone/page-events/actions/lightbox.phtml:29
+#: inc/backbone/page-events/actions/lightbox.phtml:25
 msgid "Lightbox animation"
 msgstr ""
 
-#: inc/backbone/page-events/actions/lightbox.phtml:40
+#: inc/backbone/page-events/actions/lightbox.phtml:36
 msgid "You don't have any lightboxes yet. Create one using the link below."
 msgstr ""
 
@@ -6216,11 +6253,11 @@ msgstr ""
 msgid "Step 1: Select your Trigger"
 msgstr ""
 
-#: inc/backbone/page-events/form.phtml:33
+#: inc/backbone/page-events/form.phtml:27
 msgid "Step 2: Set the action for the trigger"
 msgstr ""
 
-#: inc/backbone/page-events/form.phtml:37
+#: inc/backbone/page-events/form.phtml:31
 msgid "This is only available if you have Thrive Leads installed and activated"
 msgstr ""
 
@@ -6295,10 +6332,6 @@ msgstr ""
 
 #: inc/backbone/util/edit-global-colors.phtml:72
 msgid "NO"
-msgstr ""
-
-#: inc/backbone/util/edit-mode.phtml:7
-msgid "DONE"
 msgstr ""
 
 #: inc/backbone/util/favorite-colors.phtml:7

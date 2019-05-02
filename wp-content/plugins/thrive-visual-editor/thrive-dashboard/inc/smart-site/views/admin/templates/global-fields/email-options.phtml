@@ -1,0 +1,19 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Email Address', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-email" class="input-change" type="email" value="<#= model.get('data').email ? model.get('data').email : '' #>" data-field="data_email" placeholder="<?php echo __( 'email@someexample.com', TVE_DASH_TRANSLATE_DOMAIN ) ?>">
+		<label for="tvd-tss-field-email"><?php echo __( 'Email Address', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>

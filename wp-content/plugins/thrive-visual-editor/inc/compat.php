@@ -151,6 +151,24 @@ function tve_fix_plugin_conflicts() {
 		if ( function_exists( 'theretailer_deregister' ) ) {
 			remove_action( 'wp_enqueue_scripts', 'theretailer_deregister' );
 		}
+
+		/**
+		 * Removed Last Modified Plugin content from TAR Editor page
+		 *
+		 * https://wordpress.org/plugins/wp-last-modified-info/
+		 */
+		if ( function_exists( 'lmt_print_last_modified_info_post' ) ) {
+			remove_filter( 'the_content', 'lmt_print_last_modified_info_post' );
+		}
+
+		/**
+		 * Removed Last Modified Plugin content from TAR Editor pages
+		 *
+		 * https://wordpress.org/plugins/wp-last-modified-info/
+		 */
+		if ( function_exists( 'lmt_print_last_modified_info_page' ) ) {
+			remove_filter( 'the_content', 'lmt_print_last_modified_info_page' );
+		}
 	}
 }
 
@@ -405,9 +423,10 @@ function tve_membership_plugin_can_display_content() {
 	/**
 	 * Filter hook that allows plugins to hook into TCB and prevent TCB content from being displayed if e.g. the user does not have access to this content
 	 *
+	 * @param bool $can_display
+	 *
 	 * @since 1.200.3
 	 *
-	 * @param bool $can_display
 	 */
 	return apply_filters( 'tcb_can_display_content', true );
 
@@ -597,3 +616,32 @@ function tve_compat_plugins_loaded_hook() {
 }
 
 add_action( 'plugins_loaded', 'tve_compat_plugins_loaded_hook' );
+
+
+/**
+ * Added hooks to ensure compatibility between TAR and WP Last Modified Info plugin
+ */
+add_filter( 'wplmi_display_priority_post', 'tve_wp_last_modified_info' );
+add_filter( 'wplmi_display_priority_page', 'tve_wp_last_modified_info' );
+
+/**
+ * Compatibility with WP Last Modified Info plugin
+ *
+ * WP Market:
+ * https://wordpress.org/plugins/wp-last-modified-info/
+ *
+ * GIT Source Code:
+ * https://github.com/iamsayan/wp-last-modified-info
+ *
+ * @param int $hook_priority
+ *
+ * @return int
+ */
+function tve_wp_last_modified_info( $hook_priority = 10 ) {
+
+	if ( ! is_editor_page_raw() ) {
+		$hook_priority = PHP_INT_MAX;
+	}
+
+	return $hook_priority;
+}

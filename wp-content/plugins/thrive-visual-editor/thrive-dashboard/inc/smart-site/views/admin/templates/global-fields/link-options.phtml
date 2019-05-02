@@ -1,0 +1,25 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Text Value', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-text" class="input-change" type="text" value="<#= model.get('data').text ? model.get('data').text : '' #>" data-field="data_text" placeholder="<?php echo __( 'Privacy Policy', TVE_DASH_TRANSLATE_DOMAIN ) ?>">
+		<label for="tvd-tss-field-text"><?php echo __( 'Anchor Text', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'URL Value', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-url" class="input-change" type="text" value="<#= model.get('data').url ? model.get('data').url : '' #>" data-field="data_url" placeholder="<?php echo __( 'e.g WidgetCorp', TVE_DASH_TRANSLATE_DOMAIN ) ?>">
+		<label for="tvd-tss-field-url"><?php echo __( 'URL', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>

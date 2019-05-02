@@ -49,11 +49,7 @@ $wp_templates = tcb_elements()->element_factory( 'menu' )->get_wp_menu_templates
 	</div>
 </div>
 
-<div class="row pt-10">
-	<div class="col col-xs-6">
-		<button type="button" class="tcb-left tve-button medium gray tcb-modal-cancel"><?php echo __( 'Cancel', 'thrive-cb' ) ?></button>
-	</div>
-	<div class="col col-xs-6">
-		<button type="button" class="tcb-right tve-button medium green tcb-modal-save"><?php echo __( 'Done', 'thrive-cb' ) ?></button>
-	</div>
+<div class="control-grid">
+	<button type="button" class="tcb-left tve-button text-only tcb-modal-cancel"><?php echo __( 'Cancel', 'thrive-cb' ) ?></button>
+	<button type="button" class="tcb-right tve-button medium tcb-modal-save"><?php echo __( 'Done', 'thrive-cb' ) ?></button>
 </div>

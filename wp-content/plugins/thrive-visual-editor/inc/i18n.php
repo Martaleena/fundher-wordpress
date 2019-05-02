@@ -236,7 +236,7 @@ return array(
 		'guaranteebox'  => __( 'Guarantee Box', $d ),
 		'contact_form'  => __( 'Contact Form', $d ),
 		'checkout'      => __( 'Checkout', $d ),
-		'fancydivider' => __( 'Fancy Divider', $d ),
+		'fancydivider'  => __( 'Fancy Divider', $d ),
 	),
 	'el_dir_top'                         => __( 'Above', $d ),
 	'el_dir_bottom'                      => __( 'Below', $d ),
@@ -296,7 +296,7 @@ return array(
 	'inherit_lp_font'                    => __( 'Inherit Landing Page Font', $d ),
 	'inherit_theme_font'                 => __( 'Inherit Theme Font', $d ),
 	'global'                             => array(
-		'element_not_found'      => __( 'This Element is not found inside this page.', $d ),
+		'element_not_found'      => __( 'There aren\'t any instances on this page', $d ),
 		'global_styles'          => __( 'Global Styles', $d ),
 		'template_styles'        => __( 'Template Styles', $d ),
 		'global_color_edit'      => __( 'Careful, you are editing a global color.', $d ),
@@ -327,5 +327,12 @@ return array(
 		'save_favorite_gradient' => __( 'Save as favorite gradient', $d ),
 		'save_global_color'      => __( 'Save as global color', $d ),
 		'save_global_gradient'   => __( 'Save as global gradient', $d ),
+	),
+	'ajax_error'                         => array(
+		'wordfence'       => __( 'The action could not be finished because the plugin "WordFence" blocked the request. Set your WordFence Firewall to "Learning Mode" and try again.', $d ),
+		'403'             => __( 'The action could not be finished because it was forbidden.', $d ),
+		'404'             => __( 'The action could not be finished because the URL could not be found.', $d ),
+		'500'             => __( 'The action could not be finished because of a fatal server error.', $d ),
+		'session_expired' => __( 'The action could not be finished because your session expired and you are no longer logged in. Log in using the form below in order to continue.', $d ),
 	),
 );

@@ -8,24 +8,18 @@
 <# if ( this.model ) { #>
 	<div class="form-state state-trigger" style="display: none">
 		<h3 class="subtitle"><?php echo __( 'Step 1: Select your Trigger', 'thrive-cb' ) ?></h3>
-		<div class="row mt-20" id="form-triggers">
+		<div class="control-grid left-align wrap mt-20" id="form-triggers">
 			<# _.each( this.get_triggers(), function( trigger, key ) { #>
-				<div class="col-xs-3">
-					<div class="evt-trigger tcb-text-center item-box click form-select-item<#=this.model.t == key ? ' selected' : ''#>" data-fn="item_select" data-field="t" data-item="<#=key#>">
-						<#= TVE.icon( trigger.icon ) #>
-						<div class="trigger-name"><#= trigger.label #></div>
-					</div>
+				<div class="evt-trigger mr-30 tcb-text-center item-box click form-select-item<#=this.model.t == key ? ' selected' : ''#>" data-fn="item_select" data-field="t" data-item="<#=key#>">
+					<#= TVE.icon( trigger.icon ) #>
+					<div class="trigger-name"><#= trigger.label #></div>
 				</div>
 			<# }, this ) #>
 		</div>
 		<div id="trigger-settings" class="mt-30"></div>
-		<div class="row form-step-action">
-			<div class="col-xs-6">
-				<button type="button" class="tcb-left tve-button medium text-only grey click" data-fn="trigger_cancel"><?php echo __( 'Cancel', 'thrive-cb' ) ?></button>
-			</div>
-			<div class="col-xs-6">
-				<button type="button" style="display: none" class="tcb-right tve-button continue medium green click" data-fn="trigger_continue"><?php echo __( 'Continue', 'thrive-cb' ) ?></button>
-			</div>
+		<div class="control-grid form-step-action">
+			<button type="button" class="tcb-left tve-button text-only click" data-fn="trigger_cancel"><?php echo __( 'Cancel', 'thrive-cb' ) ?></button>
+			<button type="button" style="display: none" class="tcb-right tve-button continue medium click" data-fn="trigger_continue"><?php echo __( 'Continue', 'thrive-cb' ) ?></button>
 		</div>
 
 	</div>
@@ -42,13 +36,9 @@
 			<# }, this ) #>
 		</div>
 		<div id="action-settings" class="mt-30"></div>
-		<div class="row form-step-action">
-			<div class="col-xs-6">
-				<button type="button" class="tcb-left tve-button medium grey text-only click" data-fn="action_cancel"><?php echo __( 'Back', 'thrive-cb' ) ?></button>
-			</div>
-			<div class="col-xs-6">
-				<button type="button" style="display: none" class="tcb-right tve-button continue medium green click" data-fn="action_continue"><?php echo __( 'Save', 'thrive-cb' ) ?></button>
-			</div>
+		<div class="control-grid form-step-action">
+			<button type="button" class="tcb-left tve-button text-only click" data-fn="action_cancel"><?php echo __( 'Back', 'thrive-cb' ) ?></button>
+			<button type="button" style="display: none" class="tcb-right tve-button continue medium click tcb-modal-save" data-fn="action_continue"><?php echo __( 'Save', 'thrive-cb' ) ?></button>
 		</div>
 	</div>
 <# } #>

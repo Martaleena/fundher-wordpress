@@ -51,13 +51,6 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		protected $template = '';
 
 		/**
-		 * currently used landing page set
-		 *
-		 * @var string
-		 */
-		protected $set = '';
-
-		/**
 		 * javascripts for the head and footer section, if any
 		 *
 		 * @var array
@@ -113,7 +106,6 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 			$this->template       = $landing_page_template;
 			$this->global_scripts = $this->meta( 'tve_global_scripts' );
 			$this->page_events    = $this->meta( 'tve_page_events', null, true, array() );
-			$this->set            = $this->meta( 'tve_landing_set' );
 
 			$this->config = tve_get_landing_page_config( $landing_page_template );
 
@@ -125,13 +117,11 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 					$this->template_styles[ $key ] = $this->get_template_styles( $key );
 				}
 
-				if ( ! empty( $this->set ) ) {
-					add_action( 'tcb_get_extra_global_variables', array( $this, 'output_landing_page_set_variables' ) );
+				add_action( 'tcb_get_extra_global_variables', array( $this, 'output_landing_page_variables' ) );
 
-					add_filter( 'tcb_get_extra_global_styles', array( $this, 'add_landing_page_set_styles' ) );
+				add_filter( 'tcb_get_extra_global_styles', array( $this, 'add_landing_page_styles' ) );
 
-					add_filter( 'tcb_prepare_global_variables_for_front', array( $this, 'prepare_landing_page_set_variables_for_front' ), 10, 2 );
-				}
+				add_filter( 'tcb_prepare_global_variables_for_front', array( $this, 'prepare_landing_page_variables_for_front' ), 10, 2 );
 			}
 
 			$this->globals     = empty( $this->globals ) ? array() : $this->globals;
@@ -196,35 +186,43 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 *
 		 * @return array
 		 */
-		public function add_landing_page_set_styles( $global_styles = array() ) {
+		public function add_landing_page_styles( $global_styles = array() ) {
 
 			foreach ( $this->template_styles as $element_type => $value ) {
-				$global_styles[] = get_option( 'thrv_lp_set_' . $this->set . '_' . $element_type, array() );
+				$global_styles[] = get_post_meta( $this->id, 'thrv_lp_template_' . $element_type, true );
 			}
 
 			return $global_styles;
 		}
 
 		/**
-		 * Prepare set variables for frontend
+		 * Prepare LP variables for frontend
 		 *
 		 * @return array
 		 */
-		public function prepare_landing_page_set_variables_for_front() {
+		public function prepare_landing_page_variables_for_front() {
 
 			$search  = array();
 			$replace = array();
 
-			$set_colors    = get_option( 'thrv_lp_set_' . $this->set . '_colours', array() );
-			$set_gradients = get_option( 'thrv_lp_set_' . $this->set . '_gradients', array() );
+			$set_colors    = get_post_meta( $this->id, 'thrv_lp_template_colours', true );
+			$set_gradients = get_post_meta( $this->id, 'thrv_lp_template_gradients', true );
+
+			if ( ! is_array( $set_colors ) ) {
+				$set_colors = array();
+			}
+
+			if ( ! is_array( $set_gradients ) ) {
+				$set_gradients = array();
+			}
 
 			foreach ( $set_colors as $color ) {
-				$search[]  = 'var(' . TVE_LP_SET_COLOR_VAR_CSS_PREFIX . $color['id'] . ')';
+				$search[]  = 'var(' . TVE_LP_COLOR_VAR_CSS_PREFIX . $color['id'] . ')';
 				$replace[] = $color['color'];
 
 			}
 			foreach ( $set_gradients as $gradient ) {
-				$search[]  = 'var(' . TVE_LP_SET_GRADIENT_VAR_CSS_PREFIX . $gradient['id'] . ')';
+				$search[]  = 'var(' . TVE_LP_GRADIENT_VAR_CSS_PREFIX . $gradient['id'] . ')';
 				$replace[] = $gradient['gradient'];
 			}
 
@@ -235,111 +233,123 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		}
 
 		/**
-		 * Outputs Landing Page Set global variables
+		 * Prepares the Landing Page for custom export (by the user with the build-in export functionality)
+		 */
+		public function prepare_landing_page_for_export() {
+
+			$config = array();
+
+			foreach ( $this->template_styles as $element_type => $value ) {
+				$meta_value = get_post_meta( $this->id, 'thrv_lp_template_' . $element_type, true );
+
+				if ( ! empty( $meta_value ) ) {
+					$config['page_styles'][ $element_type ] = $meta_value;
+				}
+			}
+
+			$tpl_colors    = get_post_meta( $this->id, 'thrv_lp_template_colours', true );
+			$tpl_gradients = get_post_meta( $this->id, 'thrv_lp_template_gradients', true );
+
+			if ( ! empty( $tpl_colors ) ) {
+				$config['page_vars']['colors'] = $tpl_colors;
+			}
+
+			if ( ! empty( $tpl_gradients ) ) {
+				$config['page_vars']['gradients'] = $tpl_gradients;
+			}
+
+			return $config;
+		}
+
+		/**
+		 * Outputs Landing Page template global variables
 		 *
 		 * This variables comes from
 		 */
-		public function output_landing_page_set_variables() {
+		public function output_landing_page_variables() {
 
-			$set_colors    = get_option( 'thrv_lp_set_' . $this->set . '_colours', array() );
-			$set_gradients = get_option( 'thrv_lp_set_' . $this->set . '_gradients', array() );
+			$tpl_colors    = get_post_meta( $this->id, 'thrv_lp_template_colours', true );
+			$tpl_gradients = get_post_meta( $this->id, 'thrv_lp_template_gradients', true );
 
-			foreach ( $set_colors as $color ) {
-				echo TVE_LP_SET_COLOR_VAR_CSS_PREFIX . $color['id'] . ':' . $color['color'] . ';';
+			if ( ! is_array( $tpl_colors ) ) {
+				$tpl_colors = array();
 			}
-			foreach ( $set_gradients as $gradient ) {
-				echo TVE_LP_SET_GRADIENT_VAR_CSS_PREFIX . $gradient['id'] . ':' . $gradient['gradient'] . ';';
+
+			if ( ! is_array( $tpl_gradients ) ) {
+				$tpl_gradients = array();
+			}
+
+
+			foreach ( $tpl_colors as $color ) {
+				echo TVE_LP_COLOR_VAR_CSS_PREFIX . $color['id'] . ':' . $color['color'] . ';';
+			}
+			foreach ( $tpl_gradients as $gradient ) {
+				echo TVE_LP_GRADIENT_VAR_CSS_PREFIX . $gradient['id'] . ':' . $gradient['gradient'] . ';';
 			}
 		}
 
 		/**
 		 * BULK Updates the global styles from the cloud
 		 *
-		 * Called from set_cloud_template method
+		 * @param array $page_styles
+		 *
+		 * Called from set_cloud_template method and form import LP from zip method
 		 */
-		public function update_set_global_styles() {
+		public function update_template_global_styles( $page_styles = array() ) {
 
 			if ( ! apply_filters( 'tcb_allow_landing_page_set_data', true ) ) {
 				return;
 			}
 
-			if ( empty( $this->cloud_template_data['set_styles'] ) ) {
-				return;
+			if ( empty( $page_styles ) && ! empty( $this->cloud_template_data['page_styles'] ) ) {
+				$page_styles = $this->cloud_template_data['page_styles'];
 			}
 
 
-			$original_set_style_options = array();
-			$user_set_style_options     = array();
+			foreach ( $this->template_styles as $element_type => $value ) {
+				$this->meta_delete( 'thrv_lp_template_' . $element_type );
+			}
+
+			if ( empty( $page_styles ) ) {
+				return;
+			}
 
 			foreach ( $this->template_styles as $element_type => $value ) {
-				$original_set_style_options[ $element_type ] = 'thrv_lp_set_' . $this->set . '_original_' . $element_type . '_styles';
-				$user_set_style_options [ $element_type ]    = 'thrv_lp_set_' . $this->set . '_' . $element_type;
+				$style_post_meta[ $element_type ] = 'thrv_lp_template_' . $element_type;
 
-				if ( ! empty( $this->cloud_template_data['set_styles'][ $element_type ] ) && is_array( $this->cloud_template_data['set_styles'][ $element_type ] ) ) {
-					update_option( $original_set_style_options[ $element_type ], $this->cloud_template_data['set_styles'][ $element_type ] );
-
-					$user_set_styles = get_option( $user_set_style_options [ $element_type ], array() );
-
-					foreach ( $this->cloud_template_data['set_styles'][ $element_type ] as $key => $set_style ) {
-						if ( empty( $user_set_styles[ $key ] ) ) {
-							$user_set_styles[ $key ] = $set_style;
-						}
-					}
-
-					update_option( $user_set_style_options [ $element_type ], $user_set_styles );
+				if ( ! empty( $page_styles[ $element_type ] ) && is_array( $page_styles[ $element_type ] ) ) {
+					update_post_meta( $this->id, $style_post_meta[ $element_type ], $page_styles[ $element_type ] );
 				}
 			}
 		}
 
 		/**
-		 * BULK Updates the SET CSS Variables
+		 * BULK Updates the LP CSS Variables
 		 *
-		 * Called from set_cloud_template method
+		 * @param array $page_vars
+		 *
+		 * Called from set_cloud_template method and from import LP from zip method
 		 */
-		public function update_set_css_variables() {
+		public function update_template_css_variables( $page_vars = array() ) {
 
 			if ( ! apply_filters( 'tcb_allow_landing_page_set_data', true ) ) {
 				return;
 			}
 
-			if ( empty( $this->cloud_template_data['set_vars'] ) ) {
-				return;
+			if ( empty( $page_vars ) && ! empty( $this->cloud_template_data['page_vars'] ) ) {
+				$page_vars = $this->cloud_template_data['page_vars'];
 			}
 
-			/**
-			 * Also possible find a different way to handle this
-			 */
-			$original_set_colors_option    = 'thrv_lp_set_' . $this->set . '_original_colours';
-			$original_set_gradients_option = 'thrv_lp_set_' . $this->set . '_original_gradients';
-			$user_set_colors_option        = 'thrv_lp_set_' . $this->set . '_colours';
-			$user_set_gradients_option     = 'thrv_lp_set_' . $this->set . '_gradients';
-
-			if ( ! empty( $this->cloud_template_data['set_vars']['colors'] ) && is_array( $this->cloud_template_data['set_vars']['colors'] ) ) {
-				update_option( $original_set_colors_option, $this->cloud_template_data['set_vars']['colors'] );
-
-				$user_set_colors = get_option( $user_set_colors_option, array() );
-
-				foreach ( $this->cloud_template_data['set_vars']['colors'] as $key => $color ) {
-					if ( empty( $user_set_colors[ $key ] ) ) {
-						$user_set_colors[ $key ] = $color;
-					}
-				}
-
-				update_option( $user_set_colors_option, $user_set_colors );
+			if ( ! empty( $page_vars['colors'] ) && is_array( $page_vars['colors'] ) ) {
+				update_post_meta( $this->id, 'thrv_lp_template_colours', $page_vars['colors'] );
+			} else {
+				$this->meta_delete( 'thrv_lp_template_colours' );
 			}
 
-			if ( ! empty( $this->cloud_template_data['set_vars']['gradients'] ) && is_array( $this->cloud_template_data['set_vars']['gradients'] ) ) {
-				update_option( $original_set_gradients_option, $this->cloud_template_data['set_vars']['gradients'] );
-
-				$user_set_gradients = get_option( $user_set_gradients_option, array() );
-
-				foreach ( $this->cloud_template_data['set_vars']['gradients'] as $key => $gradient ) {
-					if ( empty( $user_set_gradients[ $key ] ) ) {
-						$user_set_gradients[ $key ] = $gradient;
-					}
-				}
-
-				update_option( $user_set_gradients_option, $user_set_gradients );
+			if ( ! empty( $page_vars['gradients'] ) && is_array( $page_vars['gradients'] ) ) {
+				update_post_meta( $this->id, 'thrv_lp_template_gradients', $page_vars['gradients'] );
+			} else {
+				$this->meta_delete( 'thrv_lp_template_gradients' );
 			}
 		}
 
@@ -351,16 +361,12 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 * @return array
 		 */
 		public function get_template_css_variables( $for = '' ) {
-			$template_css_variables = array();
+			$post_meta_name = 'thrv_lp_template_' . $for;
 
-			if ( ! empty( $this->set ) ) {
-				$option_name = 'thrv_lp_set_' . $this->set . '_' . $for;
+			$template_css_variables = get_post_meta( $this->id, $post_meta_name, true );
 
-				$template_css_variables = get_option( $option_name, array() );
-
-				if ( ! is_array( $template_css_variables ) ) {
-					$template_css_variables = array();
-				}
+			if ( ! is_array( $template_css_variables ) ) {
+				$template_css_variables = array();
 			}
 
 			return array_reverse( $template_css_variables );
@@ -374,13 +380,9 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 * @return array
 		 */
 		protected function get_template_styles( $for_element = '' ) {
-			$element_template_styles = array();
+			$post_meta_name = 'thrv_lp_template_' . $for_element;
 
-			if ( ! empty( $this->set ) ) {
-				$option_name = 'thrv_lp_set_' . $this->set . '_' . $for_element;
-
-				$element_template_styles = tve_get_global_styles( $for_element, $option_name );
-			}
+			$element_template_styles = tve_get_global_styles( $for_element, $post_meta_name, $this->id );
 
 			return $element_template_styles;
 		}
@@ -398,34 +400,32 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 * @param bool   $ignore_css
 		 */
 		public function update_template_style( $identifier = '', $for_element = '', $name = '', $css, $fonts = array(), $ignore_css = false ) {
-			if ( ! empty( $this->set ) ) {
 
-				$option_name = 'thrv_lp_set_' . $this->set . '_' . $for_element;
+			$post_meta_name = 'thrv_lp_template_' . $for_element;
 
-				$template_styles = get_option( $option_name, array() );
+			$template_styles = get_post_meta( $this->id, $post_meta_name, true );
 
-				if ( ! is_array( $template_styles ) ) {
-					/**
-					 * Security check: if the option is not empty and somehow the stored value is not an array, make it an array.
-					 */
-					$template_styles = array();
+			if ( ! is_array( $template_styles ) ) {
+				/**
+				 * Security check: if the option is not empty and somehow the stored value is not an array, make it an array.
+				 */
+				$template_styles = array();
+			}
+
+			if ( ! empty( $template_styles[ $identifier ] ) ) {
+
+				/**
+				 * Edit Global Style
+				 */
+				if ( false === $ignore_css ) {
+					$template_styles[ $identifier ]['css']   = $css;
+					$template_styles[ $identifier ]['fonts'] = $fonts;
+				}
+				if ( $name ) {
+					$template_styles[ $identifier ]['name'] = $name;
 				}
 
-				if ( ! empty( $template_styles[ $identifier ] ) ) {
-
-					/**
-					 * Edit Global Style
-					 */
-					if ( false === $ignore_css ) {
-						$template_styles[ $identifier ]['css']   = $css;
-						$template_styles[ $identifier ]['fonts'] = $fonts;
-					}
-					if ( $name ) {
-						$template_styles[ $identifier ]['name'] = $name;
-					}
-
-					update_option( $option_name, $template_styles );
-				}
+				update_post_meta( $this->id, $post_meta_name, $template_styles );
 			}
 		}
 
@@ -438,18 +438,14 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 * @param array $data
 		 */
 		public function update_template_css_variable( $id = 0, $data = array() ) {
-			if ( empty( $this->set ) ) {
-				return;
-			}
 
-			$option_name = array(
-				'color'    => 'thrv_lp_set_{set_id}_colours',
-				'gradient' => 'thrv_lp_set_{set_id}_gradients',
+			$post_meta_name = array(
+				'color'    => 'thrv_lp_template_colours',
+				'gradient' => 'thrv_lp_template_gradients',
 			);
 
-			$tpl_css_var_option_name = str_replace( '{set_id}', $this->set, $option_name[ $data['key'] ] );
-			$tpl_css_var_values      = get_option( $tpl_css_var_option_name, array() );
-
+			$tpl_css_var_post_meta_name = $post_meta_name[ $data['key'] ];
+			$tpl_css_var_values         = get_post_meta( $this->id, $tpl_css_var_post_meta_name, true );
 			if ( ! is_array( $tpl_css_var_values ) ) {
 				$tpl_css_var_values = array();
 			}
@@ -474,7 +470,7 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 					$tpl_css_var_values[ $index ]['custom_name'] = $data['custom_name'];
 				}
 
-				update_option( $tpl_css_var_option_name, $tpl_css_var_values );
+				update_post_meta( $this->id, $tpl_css_var_post_meta_name, $tpl_css_var_values );
 			}
 		}
 
@@ -1152,14 +1148,12 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 			$this->template            = $cloud_template;
 			$this->is_cloud_template   = true;
 			$this->cloud_template_data = $this->config = $config;
-			$this->set                 = str_replace( ' ', '-', trim( $this->cloud_template_data['set'] ) );
 
 			$this->meta( 'tve_landing_page', $this->template );
-			$this->meta( 'tve_landing_set', $this->set );
 			$this->reset( true );
 
-			$this->update_set_css_variables();
-			$this->update_set_global_styles();
+			$this->update_template_css_variables();
+			$this->update_template_global_styles();
 
 			return $this;
 		}
@@ -1177,14 +1171,24 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 		 * @return TCB_Landing_Page
 		 */
 		public function change_template( $landing_page_template ) {
+			/**
+			 * Delete Template Colors and Template Gradients meta in case the page is not a cloud page
+			 */
+			$this->meta_delete( 'thrv_lp_template_colours' );
+			$this->meta_delete( 'thrv_lp_template_gradients' );
+
+			/**
+			 * Also delete Template styles meta
+			 */
+			foreach ( $this->template_styles as $element_type => $value ) {
+				$this->meta_delete( 'thrv_lp_template_' . $element_type );
+			}
 
 			if ( ! $landing_page_template ) {
 				$this->template = '';
 				$this->meta_delete( 'tve_landing_page' );
 				//Delete Also The Setting To Disable Theme CSS
 				$this->meta_delete( 'tve_disable_theme_dependency' );
-				//Also delete the landing page set
-				$this->meta_delete( 'tve_landing_set' );
 
 				return $this;
 			}
@@ -1198,7 +1202,6 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 				if ( $this->is_cloud_template ) {
 					$this->cloud_template_data = tve_get_cloud_template_config( $landing_page_template );
 				}
-				$this->meta_delete( 'tve_landing_set' );
 
 				/* 2014-09-19: reset the landing page contents, the whole page will reload using the clear new template */
 				$this->reset( false );
@@ -1227,10 +1230,27 @@ if ( ! class_exists( 'TCB_Landing_Page' ) ) {
 					$meta[ $template_index ]['theme_dependency'] = 0;
 				}
 
-				if ( empty( $meta[ $template_index ]['set'] ) ) {
-					$this->meta_delete( 'tve_landing_set' );
-				} else {
-					$this->meta( 'tve_landing_set', $meta[ $template_index ]['set'] );
+				/**
+				 * Page Saved lp meta if present
+				 */
+				if ( empty( $meta[ $template_index ]['tpl_colours'] ) ) {
+					$this->meta( 'thrv_lp_template_colours', $meta[ $template_index ]['tpl_colours'] );
+				}
+
+				if ( empty( $meta[ $template_index ]['tpl_gradients'] ) ) {
+					$this->meta( 'thrv_lp_template_gradients', $meta[ $template_index ]['tpl_gradients'] );
+				}
+
+				if ( empty( $meta[ $template_index ]['tpl_button'] ) ) {
+					$this->meta( 'thrv_lp_template_button', $meta[ $template_index ]['tpl_button'] );
+				}
+
+				if ( empty( $meta[ $template_index ]['tpl_section'] ) ) {
+					$this->meta( 'thrv_lp_template_section', $meta[ $template_index ]['tpl_section'] );
+				}
+
+				if ( empty( $meta[ $template_index ]['tpl_contentbox'] ) ) {
+					$this->meta( 'thrv_lp_template_contentbox', $meta[ $template_index ]['tpl_contentbox'] );
 				}
 
 				$this->meta( 'tve_disable_theme_dependency', $meta[ $template_index ]['theme_dependency'] );

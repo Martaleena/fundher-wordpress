@@ -288,15 +288,21 @@ function tve_load_meta_tags( $post_id = 0 ) {
  *
  * @param string $for_element
  * @param string $option_name
+ * @param int    $for_post
  *
  * @return array
  */
-function tve_get_global_styles( $for_element = '', $option_name = '' ) {
+function tve_get_global_styles( $for_element = '', $option_name = '', $for_post = 0 ) {
 	if ( empty( $option_name ) ) {
 		$option_name = 'tve_global_' . $for_element . '_styles';
 	}
 
-	$global_styles         = get_option( $option_name, array() );
+	if ( ! empty( $for_post ) ) {
+		$global_styles = get_post_meta( $for_post, $option_name, true );
+	} else {
+		$global_styles = get_option( $option_name, array() );
+	}
+
 	$element_global_styles = array();
 
 	if ( ! is_array( $global_styles ) ) {
@@ -327,9 +333,7 @@ function tve_get_global_styles( $for_element = '', $option_name = '' ) {
 function tve_load_global_variables() {
 	$global_colors    = get_option( 'thrv_global_colours', array() );
 	$global_gradients = get_option( 'thrv_global_gradients', array() );
-	if ( empty( $global_colors ) && empty( $global_gradients ) ) {
-		return;
-	}
+
 	echo '<style type="text/css" id="tve_global_variables">';
 	echo ':root{';
 	foreach ( $global_colors as $color ) {
@@ -363,10 +367,11 @@ function tve_load_global_styles() {
  *
  * @param string $css_string
  * @param bool   $bypass_editor_check
+ * @param bool   $allow_lp_vars
  *
  * @return mixed|string
  */
-function tve_prepare_global_variables_for_front( $css_string = '', $bypass_editor_check = false ) {
+function tve_prepare_global_variables_for_front( $css_string = '', $bypass_editor_check = false, $allow_lp_vars = true ) {
 	if ( is_editor_page() && false === $bypass_editor_check ) {
 		return $css_string;
 	}
@@ -389,9 +394,9 @@ function tve_prepare_global_variables_for_front( $css_string = '', $bypass_edito
 	}
 
 
-	if ( defined( 'DOING_AJAX' ) && DOING_AJAX && ! empty( $_REQUEST['post_id'] ) && is_numeric( $_REQUEST['post_id'] ) ) {
+	if ( $allow_lp_vars && defined( 'DOING_AJAX' ) && DOING_AJAX && ! empty( $_REQUEST['post_id'] ) && is_numeric( $_REQUEST['post_id'] ) ) {
 		/**
-		 * For AJAX Requests (Ex: export landing page) we need also that filter to be called
+		 * For AJAX Requests we need also that filter to be called
 		 *
 		 * Therefore we instantiate a landing page object if the provided post is a landing page
 		 */
@@ -640,7 +645,6 @@ function tve_editor_content( $content, $use_case = null ) {
 	}
 
 	if ( $is_editor_page ) {
-
 		// this is an editor page
 		$tve_saved_content = tve_get_post_meta( $post_id, 'tve_updated_post', true );
 
@@ -2759,6 +2763,7 @@ function tve_widget_menu_li_classes( $classes ) {
 
 	return $classes;
 }
+
 /**
  * append custom color attributes to the link items from the menu
  *
@@ -3011,7 +3016,6 @@ function tve_post_has_changed( $post_has_changed, $last_revision, $post ) {
 function tve_get_used_meta_keys() {
 	$meta_keys = array(
 		'tve_landing_page',
-		'tve_landing_set',
 		'tve_disable_theme_dependency',
 		'tve_content_before_more',
 		'tve_content_more_found',

@@ -1,0 +1,27 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+
+
+
+<div class="tvd-tss-side-menu"></div>
+<div class="tvd-tss-fields-content">
+    <div>
+        <h3><?php _e('Global Fields', TVE_DASH_TRANSLATE_DOMAIN) ?></h3>
+        <a href="javascript:void(0)" class="tvd-tss-add-group"><i><?php echo dashboard_icon( 'plus-circle-regular' ) ?></i><span><?php _e('New Group', TVE_DASH_TRANSLATE_DOMAIN) ?></span></a>
+    </div>
+    <span>
+        <?php _e('Add global information that can be used in many places on your site. Your company address, for example', TVE_DASH_TRANSLATE_DOMAIN) ?>
+    </span>
+    <ul class="tvd-tss-groups-wrapper"></ul>
+</div>
+
+

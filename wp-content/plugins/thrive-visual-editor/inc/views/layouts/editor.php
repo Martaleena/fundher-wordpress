@@ -43,6 +43,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div id="tcb-frame-container">
 		<?php $id = get_the_ID() === $_GET['post'] ? get_the_ID() : $_GET['post']; //MMM compatibility ?>
 		<iframe tabindex="-1" id="tve-editor-frame" data-src="<?php echo tcb_get_editor_url( $id, false ); ?>"></iframe>
+		<div class="top canvas-border"></div>
+		<div class="right canvas-border"></div>
+		<div class="bottom canvas-border"></div>
+		<div class="left canvas-border"></div>
 	</div>
 	<?php do_action( 'tcb_editor_iframe_after' ); ?>
 	<?php tcb_template( 'sidebar-bottom' ); ?>
@@ -51,7 +55,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php include TVE_TCB_ROOT_PATH . 'editor/css/fonts/control-panel.svg'; ?>
 	</div>
 	<div id="inline-drop-panels"></div>
-	<div class="fr-center-toolbar bottom">
+	<div class="fr-center-toolbar bottom" id="edit-mode-tool">
 		<div id="tcb-edit-mode-button"></div>
 	</div>
 </div>

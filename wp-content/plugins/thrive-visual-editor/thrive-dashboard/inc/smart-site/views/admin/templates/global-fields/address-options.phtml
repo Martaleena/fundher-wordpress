@@ -1,0 +1,53 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Address line 1', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-address1" class="input-change" type="text" value="<#= model.get('data').address1 ? model.get('data').address1 : '' #>" data-field="data_address1" placeholder="">
+		<label for="tvd-tss-field-address1"><?php echo __( 'Address line 1', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Address line 2', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-address2" class="input-change" type="text" value="<#= model.get('data').address2 ? model.get('data').address2 : '' #>" data-field="data_address2" placeholder="">
+		<label for="tvd-tss-field-address2"><?php echo __( 'Address line 2', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'City', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-city" class="input-change" type="text" value="<#= model.get('data').city ? model.get('data').city : '' #>" data-field="data_city" placeholder="">
+		<label for="tvd-tss-field-city"><?php echo __( 'City', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'County / State', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-state" class="input-change" type="text" value="<#= model.get('data').state ? model.get('data').state : '' #>" data-field="data_state" placeholder="">
+		<label for="tvd-tss-field-state"><?php echo __( 'County / State', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Zip / Postal Code', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-zip" class="input-change" type="text" value="<#= model.get('data').zip ? model.get('data').zip : '' #>" data-field="data_zip" placeholder="">
+		<label for="tvd-tss-field-zip"><?php echo __( 'Zip / Postal Code', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>
+<div class="tvd-tss-field-data">
+	<span><?php echo __( 'Country', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	<div class="tvd-input-field">
+		<input id="tvd-tss-field-country" class="input-change" type="text" value="<#= model.get('data').country ? model.get('data').country : '' #>" data-field="data_country" placeholder="">
+		<label for="tvd-tss-field-country"><?php echo __( 'Country', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+	</div>
+</div>

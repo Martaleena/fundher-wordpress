@@ -361,10 +361,10 @@ class TCB_Elements {
 	public function custom_sidebars() {
 		$sidebars = array(
 			/**
-			 * Default sidebar for EDIT-MODE
+			 * Default sidebar for EDIT-MODE - currently an empty div. if needed, create a template for it
 			 */
 			'edit-mode' => array(
-				'template' => tcb_template( 'sidebars/edit-mode', null, true ),
+				'template' => '',
 				'title'    => __( 'Edit Mode', 'thrive-cb' ),
 			),
 		);

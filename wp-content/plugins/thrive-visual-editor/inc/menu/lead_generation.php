@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<div class="no-api tve-control api-connections-list" data-view="ApiConnections"></div>
 
 			<div class="no-api tcb-text-center mb-10 mr-5 ml-5">
-				<button class="tve-button blue long click" data-fn="edit_form_elements">
+				<button class="tve-button orange click" data-fn="edit_form_elements">
 					<?php echo __( 'Edit Form Elements', 'thrive-cb' ); ?>
 				</button>
 			</div>

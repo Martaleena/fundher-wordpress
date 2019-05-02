@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<i></i>
 	</div>
 	<div class="dropdown-content">
-		<div class="control-grid">
-			<button class="tve-button blue long click" data-fn="edit_grid_options"><?php echo __( 'Edit Grid Options', 'thrive-cb' ); ?></button>
+		<div class="flex-mid pb-10">
+			<button class="tve-button orange click" data-fn="edit_grid_options"><?php echo __( 'Edit Grid Options', 'thrive-cb' ); ?></button>
 		</div>
 		<hr>
 		<div class="tve-control no-space" data-extends="Tabs" data-key="tabs" data-target=".tabs-options"></div>

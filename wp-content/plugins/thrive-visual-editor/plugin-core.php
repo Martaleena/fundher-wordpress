@@ -13,9 +13,9 @@ define( 'TCB_CT_POST_TYPE', 'tcb_content_template' );
 define( 'TVE_CLOUD_TEMPLATES_FOLDER', 'tcb_content_templates' );
 define( 'TCB_MIN_WP_VERSION', '4.8' );
 define( 'TVE_GLOBAL_COLOR_VAR_CSS_PREFIX', '--tcb-color-' );
-define( 'TVE_LP_SET_COLOR_VAR_CSS_PREFIX', '--tcb-set-color-' );
+define( 'TVE_LP_COLOR_VAR_CSS_PREFIX', '--tcb-tpl-color-' );
 define( 'TVE_GLOBAL_GRADIENT_VAR_CSS_PREFIX', '--tcb-gradient-' );
-define( 'TVE_LP_SET_GRADIENT_VAR_CSS_PREFIX', '--tcb-set-gradient-' );
+define( 'TVE_LP_GRADIENT_VAR_CSS_PREFIX', '--tcb-tpl-gradient-' );
 define( 'TVE_GLOBAL_STYLE_CLS_PREFIX', 'tcb-global-' );
 define( 'TVE_GLOBAL_STYLE_BUTTON_CLS_PREFIX', TVE_GLOBAL_STYLE_CLS_PREFIX . 'button-' );
 define( 'TVE_GLOBAL_STYLE_SECTION_CLS_PREFIX', TVE_GLOBAL_STYLE_CLS_PREFIX . 'section-' );
@@ -183,6 +183,8 @@ add_action( 'init', 'tve_load_plugin_textdomain' );
 if ( ! empty( $_REQUEST[ TVE_EDITOR_FLAG ] ) ) {
 	if ( is_admin() ) {
 		add_action( 'init', array( tcb_editor(), 'on_admin_init' ), 20 );
+		/* Disable cache on editor page*/
+		add_action( 'init', array( tcb_editor(), 'disable_content_cache' ), 20 );
 	}
 	add_action( 'post_action_architect', array( tcb_editor(), 'post_action_architect' ), 0 );
 }

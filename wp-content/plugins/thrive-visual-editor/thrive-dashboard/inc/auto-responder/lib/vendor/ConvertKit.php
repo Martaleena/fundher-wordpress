@@ -83,11 +83,34 @@ class Thrive_Dash_Api_ConvertKit {
 	}
 
 	/**
-	 * @param string $form_id
-	 * @param        $fields array
+	 * @param $phone
 	 *
-	 * @throws Thrive_Dash_Api_ConvertKit_Exception
 	 * @return array
+	 * @throws Thrive_Dash_Api_ConvertKit_Exception
+	 */
+	public function phoneFields( $phone ) {
+
+		$phone_fields  = array();
+		$custom_fields = $this->_call( 'custom_fields' );
+
+		if ( is_array( $custom_fields ) && ! empty( $custom_fields['custom_fields'] ) ) {
+
+			foreach ( $custom_fields['custom_fields'] as $field ) {
+				if ( strpos( $field['key'], 'phone' ) !== false ) {
+					$phone_fields[ $field['key'] ] = $phone;
+				}
+			}
+		}
+
+		return $phone_fields;
+	}
+
+	/**
+	 * @param $form_id
+	 * @param $fields
+	 *
+	 * @return array|mixed
+	 * @throws Thrive_Dash_Api_ConvertKit_Exception
 	 */
 	public function subscribeForm( $form_id, $fields ) {
 		$request = sprintf( 'forms/%s/subscribe', $form_id );
@@ -100,6 +123,14 @@ class Thrive_Dash_Api_ConvertKit {
 			'email'      => $fields['email'],
 			'first_name' => $fields['name'],
 		);
+
+		if ( ! empty( $fields['phone'] ) ) {
+			$phone_fields = $this->phoneFields( $fields['phone'] );
+
+			if ( $phone_fields ) {
+				$args['fields'] = (object) $phone_fields;
+			}
+		}
 
 		$data = $this->_call( $request, $args, 'POST' );
 		/**
@@ -229,7 +260,7 @@ class Thrive_Dash_Api_ConvertKit {
 		$args    = array(
 			'email' => $email_address,
 		);
-		$assign = $this->_call( $request, $args, 'POST' );
+		$assign  = $this->_call( $request, $args, 'POST' );
 		if ( is_array( $assign ) && isset( $assign['subscription'] ) ) {
 			return true;
 		}
@@ -280,7 +311,7 @@ class Thrive_Dash_Api_ConvertKit {
 				'name' => $tag_name,
 			),
 		);
-		$tag = $this->_call( 'tags', $args, 'POST' );
+		$tag  = $this->_call( 'tags', $args, 'POST' );
 
 		return $tag;
 	}

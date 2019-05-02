@@ -21,14 +21,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div id="tve-scroll-panel">
 		<div class="tve-panel">
+			<?php /* information at the top of components that we are currently in Edit Mode */ ?>
+			<div id="component-edit-mode" class="info-text grey-text orange border white-bg bigger m-5 tcb-hide">
+				<?php echo sprintf( esc_html__( 'You are now in Edit Mode. When finished, press "DONE" in the bottom bar', 'thrive-cb' ) ); ?>
+			</div>
 			<div class="sidebar-block default-text">
 				<p><?php echo __( 'Select or add an element on the<br>canvas in order to activate this sidebar.', 'thrive-cb' ); ?></p>
 				<?php if ( tcb_editor()->has_templates_tab() ) : ?>
 					<img src="<?php echo tve_editor_css( 'images/sidebar-blank-tpl.png' ); ?>" width="207" height="328"
-							srcset="<?php echo tve_editor_css( 'images/sidebar-blank-tpl@2x.png' ); ?> 2x">
+						 srcset="<?php echo tve_editor_css( 'images/sidebar-blank-tpl@2x.png' ); ?> 2x">
 				<?php else : ?>
 					<img src="<?php echo tve_editor_css( 'images/sidebar-blank.png' ); ?>" width="193" height="326"
-							srcset="<?php echo tve_editor_css( 'images/sidebar-blank@2x.png' ); ?> 2x">
+						 srcset="<?php echo tve_editor_css( 'images/sidebar-blank@2x.png' ); ?> 2x">
 				<?php endif; ?>
 			</div>
 			<div id="tve-components" class="tcb-flex sidebar-block" style="display: none">
@@ -66,7 +70,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="tve-settings tcb-relative" id="tcb-editor-settings"><?php tcb_template( 'editor-settings', $data ); ?></div>
 
 	<a href="javascript:void(0)" class="panel-extend click" data-fn="togglePanel" data-title-collapsed="<?php echo __( 'Expand panel', 'thrive-cb' ); ?>"
-			data-title-expanded="<?php echo __( 'Collapse panel', 'thrive-cb' ); ?>" title="<?php echo __( 'Collapse panel', 'thrive-cb' ); ?>">
+	   data-title-expanded="<?php echo __( 'Collapse panel', 'thrive-cb' ); ?>" title="<?php echo __( 'Collapse panel', 'thrive-cb' ); ?>">
 		<?php tcb_icon( 'caret-left-solid' ); ?>
 	</a>
 </div>

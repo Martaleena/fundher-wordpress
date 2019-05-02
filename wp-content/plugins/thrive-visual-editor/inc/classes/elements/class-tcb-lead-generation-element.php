@@ -55,15 +55,6 @@ class TCB_Lead_Generation_Element extends TCB_Element_Abstract {
 	}
 
 	/**
-	 * Lead Generation extra sidebar state - used in EDIT COMPONENTS mode.
-	 *
-	 * @return null|string
-	 */
-	public function get_sidebar_extra_state() {
-		return tcb_template( 'sidebars/lead-generation', null, true );
-	}
-
-	/**
 	 * @return array
 	 */
 	public function own_components() {

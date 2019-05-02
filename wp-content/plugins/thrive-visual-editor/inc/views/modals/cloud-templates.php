@@ -23,7 +23,7 @@ $name_placeholder = '<span class="element-name"></span>';
 <div class="warning-ct-change">
 	<div class="tcb-notification">
 		<div class="tcb-notification-icon tcb-notification-icon-warning"><?php tcb_icon( 'info' ); ?></div>
-		<div class="tcb-notification-text"></div>
+		<div class="tcb-notification-content"></div>
 	</div>
 </div>
 <div class="tve-templates-wrapper">

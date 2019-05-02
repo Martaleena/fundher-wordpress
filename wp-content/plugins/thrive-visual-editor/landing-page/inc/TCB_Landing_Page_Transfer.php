@@ -593,7 +593,7 @@ class TCB_Landing_Page_Transfer {
 	 */
 	protected function getTCBMeta( $post_id ) {
 		$config                = array();
-		$non_lp_dependent_keys = array( 'tve_landing_page', 'tve_landing_set', 'tve_disable_theme_dependency' );
+		$non_lp_dependent_keys = array( 'tve_landing_page', 'tve_disable_theme_dependency' );
 
 		foreach ( tve_get_used_meta_keys() as $key ) {
 			$config[ $key ] = in_array( $key, $non_lp_dependent_keys ) ? get_post_meta( $post_id, $key, true ) : tve_get_post_meta( $post_id, $key );
@@ -1110,7 +1110,12 @@ class TCB_Landing_Page_Transfer {
 		if ( ! empty( $templates_meta ) ) {
 			foreach ( $templates_meta as $tpl ) {
 				/* if this has been saved before return - we check the archive filesize - this should be identical for identical imports */
-				if ( ! empty( $tpl['imported'] ) && ! empty( $tpl['zip_filesize'] ) && $tpl['zip_filesize'] == filesize( $file ) ) {
+				if ( ! empty( $tpl['imported'] ) && ! empty( $tpl['zip_filesize'] ) && $tpl['zip_filesize'] == filesize( $file ) && $tpl['name'] === $template_name ) {
+
+					$lading_page = tcb_landing_page( $page_id );
+					$lading_page->update_template_css_variables( $config['page_vars'] );
+					$lading_page->update_template_global_styles( $config['page_styles'] );
+
 					return $page_id;
 				}
 			}
@@ -1144,6 +1149,10 @@ class TCB_Landing_Page_Transfer {
 
 		update_option( 'tve_saved_landing_pages_content', $templates_content );
 		update_option( 'tve_saved_landing_pages_meta', $templates_meta );
+
+		$lading_page = tcb_landing_page( $page_id );
+		$lading_page->update_template_css_variables( $config['page_vars'] );
+		$lading_page->update_template_global_styles( $config['page_styles'] );
 
 		return $page_id;
 	}
@@ -2022,14 +2031,20 @@ class TCB_Landing_Page_Transfer {
 					}
 				}
 
-
-				$config['tve_updated_post'] = preg_replace( '#(' . TVE_GLOBAL_STYLE_CLS_PREFIX . '[a-zA-Z-_0-9]+)($\ |")*#', '$2', $config['tve_updated_post'] );
+				$config['tve_updated_post'] = preg_replace( '#(' . TVE_GLOBAL_STYLE_CLS_PREFIX . '[a-zA-Z0-9]+-(?!tpl_)\w+)#', '$2', $config['tve_updated_post'] );
 			}
 
 			/**
 			 * When using export TAR function
 			 */
-			$config['tve_custom_css'] = tve_prepare_global_variables_for_front( $config['tve_custom_css'], true );
+			$config['tve_custom_css'] = tve_prepare_global_variables_for_front( $config['tve_custom_css'], true, false );
+		}
+
+		if ( ! empty( $_REQUEST['post_id'] ) && is_numeric( $_REQUEST['post_id'] ) ) {
+			$post = tcb_post( $_REQUEST['post_id'] );
+			if ( $post->is_landing_page() ) {
+				$config = array_merge( $config, tcb_landing_page( $_REQUEST['post_id'] )->prepare_landing_page_for_export() );
+			}
 		}
 	}
 

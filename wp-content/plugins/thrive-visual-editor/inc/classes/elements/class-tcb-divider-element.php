@@ -63,7 +63,10 @@ class TCB_Divider_Element extends TCB_Element_Abstract {
 				'config' => array(
 					'divider_color' => array(
 						'config'  => array(
-							'label' => __( 'Fill', 'thrive-cb' ),
+							'label'   => __( 'Fill', 'thrive-cb' ),
+							'options' => array(
+								'showGlobals' => false,
+							),
 						),
 						'extends' => 'ColorPicker',
 					),
@@ -80,7 +83,7 @@ class TCB_Divider_Element extends TCB_Element_Abstract {
 					),
 					'style'         => array(
 						'config' => array(
-							'label'   => __( 'Style', 'thrive-cb' ),
+							'label'   => __( 'Choose Divider Style', 'thrive-cb' ),
 							'items'   => array(
 								'tve_sep-1' => array(
 									'label'            => __( 'Solid', 'thrive-cb' ),

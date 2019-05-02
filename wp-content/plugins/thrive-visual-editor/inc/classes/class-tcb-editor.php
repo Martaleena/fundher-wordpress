@@ -406,13 +406,13 @@ class TCB_Editor {
 				'favorites'     => get_option( 'thrv_custom_colours', array() ),
 				'globals'       => array_reverse( get_option( 'thrv_global_colours', array() ) ),
 				'global_prefix' => TVE_GLOBAL_COLOR_VAR_CSS_PREFIX,
-				'lp_set_prefix' => TVE_LP_SET_COLOR_VAR_CSS_PREFIX,
+				'lp_set_prefix' => TVE_LP_COLOR_VAR_CSS_PREFIX,
 			),
 			'gradients'          => array(
 				'favorites'     => get_option( 'thrv_custom_gradients', array() ),
 				'globals'       => array_reverse( get_option( 'thrv_global_gradients', array() ) ),
 				'global_prefix' => TVE_GLOBAL_GRADIENT_VAR_CSS_PREFIX,
-				'lp_set_prefix' => TVE_LP_SET_GRADIENT_VAR_CSS_PREFIX,
+				'lp_set_prefix' => TVE_LP_GRADIENT_VAR_CSS_PREFIX,
 			),
 			'global_cls_prefix'  => TVE_GLOBAL_STYLE_CLS_PREFIX,
 			'global_styles'      => array(
@@ -746,5 +746,79 @@ class TCB_Editor {
 	 */
 	public function has_save_template_button() {
 		return $this->post->post_type === 'post' || ( $this->is_page() && ! $this->is_landing_page() );
+	}
+
+
+	/**
+	 * Adding Architect TVE=true to the cache plugin's exclude pages in order to disable cache on editor pages
+	 */
+	public function disable_content_cache() {
+		/**
+		 * This constant is used by many cache plugins
+		 */
+		defined( 'DONOTCACHEPAGE' ) || define( 'DONOTCACHEPAGE', true );
+
+		$architect_query_string = 'tve=true';
+		switch ( tve_dash_detect_cache_plugin() ) {
+			case 'wp-super-cache':
+				global $wp_cache_config_file, $cache_rejected_uri;
+				if ( isset( $wp_cache_config_file ) ) {
+					if ( ! is_array( $cache_rejected_uri ) ) {
+						$cache_rejected_uri = array();
+					}
+
+					if ( ! in_array( $architect_query_string, $cache_rejected_uri, true ) && function_exists( 'wp_cache_sanitize_value' ) && function_exists( 'wp_cache_replace_line' ) ) {
+						$cache_rejected_uri[] = $architect_query_string;
+						$cache_string         = implode( ' ', $cache_rejected_uri );
+						$text                 = wp_cache_sanitize_value( str_replace( '\\\\', '\\', $cache_string ), $cache_rejected_uri );
+						wp_cache_replace_line( '^ *\$cache_rejected_uri', "\$cache_rejected_uri = $text;", $wp_cache_config_file );
+					}
+				}
+
+
+				break;
+			case 'w3-total-cache':
+				if ( class_exists( 'W3_Config' ) ) {
+					$cfg       = new W3_Config();
+					$cfg_array = $cfg->get_array( 'pgcache.reject.custom' );
+
+					if ( ! in_array( $architect_query_string, $cfg_array, true ) ) {
+						$cfg_array[] = $architect_query_string;
+						$cfg->set( 'pgcache.reject.custom', $cfg_array );
+						$cfg->save();
+					}
+				}
+				break;
+			case 'wp-fastest-cache':
+				$architect_query_string =
+					array(
+						'prefix'  => 'contain',
+						'content' => 'tve=true',
+						'type'    => 'page',
+
+					);
+				if ( $cache_option = json_decode( get_option( 'WpFastestCacheExclude' ), true ) ) {
+					if ( ! in_array( $architect_query_string, $cache_option, true ) ) {
+						$cache_option[] = $architect_query_string;
+						update_option( 'WpFastestCacheExclude', json_encode( $cache_option ) );
+					}
+				} else {
+					add_option( 'WpFastestCacheExclude', json_encode( array( $architect_query_string ) ), null, 'yes' );
+				}
+				break;
+			case 'litespeed-cache':
+				if ( $cache_option = get_option( 'litespeed-excludes_uri' ) ) {
+					if ( strpos( $cache_option, $architect_query_string ) === false ) {
+						$cache_option .= "\n{$architect_query_string}";
+						update_option( 'litespeed-excludes_uri', $cache_option );
+					}
+				} else {
+					add_option( 'litespeed-excludes_uri', $architect_query_string, null, 'yes' );
+				}
+				break;
+			default:
+		}
+
+		return;
 	}
 }

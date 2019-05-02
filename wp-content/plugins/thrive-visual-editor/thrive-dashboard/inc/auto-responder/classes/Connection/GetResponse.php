@@ -179,12 +179,19 @@ class Thrive_Dash_List_Connection_GetResponse extends Thrive_Dash_List_Connectio
 					$arguments['phone'] = '';
 				}
 
+				if ( ! empty( $_SERVER['REMOTE_ADDR'] ) ) {
+					$ip_addr = $_SERVER['REMOTE_ADDR'];
+				} else {
+					$ip_addr = empty( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ? '' : $_SERVER['HTTP_X_FORWARDED_FOR'];
+				}
+
 				$params = array(
 					'email'      => $arguments['email'],
 					'dayOfCycle' => $arguments['get-response_cycleday'],
 					'campaign'   => array(
 						'campaignId' => $list_identifier,
 					),
+					'ipAddress'  => $ip_addr,
 				);
 
 				if ( ! empty( $arguments['name'] ) ) {
@@ -242,9 +249,10 @@ class Thrive_Dash_List_Connection_GetResponse extends Thrive_Dash_List_Connectio
 	/**
 	 * Render extra html API setup form
 	 *
+	 * @param array $params
+	 *
 	 * @see api-list.php
 	 *
-	 * @param array $params
 	 */
 	public
 	function get_extra_settings(
@@ -256,9 +264,10 @@ class Thrive_Dash_List_Connection_GetResponse extends Thrive_Dash_List_Connectio
 	/**
 	 * Render extra html API setup form
 	 *
+	 * @param array $params
+	 *
 	 * @see api-list.php
 	 *
-	 * @param array $params
 	 */
 	public
 	function renderExtraEditorSettings(

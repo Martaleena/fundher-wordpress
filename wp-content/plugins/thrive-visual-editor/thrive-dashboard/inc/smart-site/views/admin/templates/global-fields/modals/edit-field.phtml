@@ -1,0 +1,80 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+<div class="tvd-modal-content tvd-tss-add">
+	<h3 class="tvd-modal-title"><?php echo __( 'Edit Field', TVE_DASH_TRANSLATE_DOMAIN ) ?></h3>
+	<div>
+		<?php _e( 'Field group', TVE_DASH_TRANSLATE_DOMAIN ) ?>: <#= group.get('name') #>
+	</div>
+
+    <div class="tvd-row tvd-collapse">
+        <div class="tvd-col tvd-m12">
+            <div class="tvd-input-field">
+                <input id="tvd-tss-field-name" class="input-change" type="text" value="<#= model.get('name') #>"
+                       data-field="name"
+                       placeholder="<?php echo __( 'e.g Company name', TVE_DASH_TRANSLATE_DOMAIN ) ?>">
+                <label for="tvd-tss-field-name"><?php echo __( 'Field Name', TVE_DASH_TRANSLATE_DOMAIN ) ?></label>
+            </div>
+        </div>
+    </div>
+    <p><?php echo __( 'Field Type', TVE_DASH_TRANSLATE_DOMAIN ) ?></p>
+    <div class="tvd-tss-flex tvd-tss-space-between tvd-collapse tvd-tss-cards">
+        <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 0  ? 'tvd-tss-selected' : '' #>"
+             data-id="0">
+			<i>Tt</i>
+            <span><?php _e( 'Text', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+        </div>
+        <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 1  ? 'tvd-tss-selected' : '' #>"
+             data-id="1">
+			<i><?php echo dashboard_icon( 'home-lg-alt-regular' ) ?></i>
+            <span><?php _e( 'Address', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+        </div>
+        <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 2  ? 'tvd-tss-selected' : '' #>"
+             data-id="2">
+			<i><?php echo dashboard_icon( 'phone-solid' ) ?></i>
+            <span><?php _e( 'Phone', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+        </div>
+        <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 3  ? 'tvd-tss-selected' : '' #>"
+             data-id="3">
+			<i><?php echo dashboard_icon( 'envelope-light' ) ?></i>
+            <span><?php _e( 'Email', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+        </div>
+        <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 4  ? 'tvd-tss-selected' : '' #>"
+             data-id="4">
+			<i><?php echo dashboard_icon( 'link' ) ?></i>
+            <span><?php _e( 'Link', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+        </div>
+	    <div class="tvd-tss-field-type <#= parseInt(model.get('type')) === 5  ? 'tvd-tss-selected' : '' #>"
+	         data-id="5">
+		    <i><?php echo dashboard_icon( 'map-marker-solid' ) ?></i>
+		    <span><?php _e( 'Location', TVE_DASH_TRANSLATE_DOMAIN ) ?></span>
+	    </div>
+    </div>
+    <div class="tvd-tss-field-data-wrapper"></div>
+
+	<div class="tvd-modal-footer">
+		<div class="tvd-row">
+			<div class="tvd-col tvd-s12 tvd-m6">
+				<a href="javascript:void(0)"
+				   class="tvd-btn-flat tvd-btn-flat-secondary tvd-btn-flat-dark tvd-waves-effect tvd-modal-close">
+					<?php echo __( 'Cancel', TVE_DASH_TRANSLATE_DOMAIN ) ?>
+				</a>
+			</div>
+			<div class="tvd-col tvd-s12 tvd-m6">
+				<a href="javascript:void(0)"
+				   class="tvd-btn tvd-btn-green tvd-waves-light tvd-right tvd-tss-save-field">
+					<?php echo __( 'Save', TVE_DASH_TRANSLATE_DOMAIN ) ?>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+

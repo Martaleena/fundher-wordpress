@@ -1,0 +1,25 @@
+<?php
+/**
+ * Thrive Themes - https://thrivethemes.com
+ *
+ * @package thrive-dashboard
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Silence is golden
+}
+?>
+
+<div>
+	<span><#= model.get('name') #></span>
+	<div>
+		<a class="tvd-tss-add-field"  href="javascript:void(0)"><i><?php echo dashboard_icon( 'plus-circle-regular' ) ?></i><span><?php _e('Add Field', TVE_DASH_TRANSLATE_DOMAIN) ?></span></a>
+		<div class="tvd-tss-sep"></div>
+		<a class="tvd-tss-edit-group" href="javascript:void(0)"><i class="tvd-icon-pencil"></i></a>
+<!--		<a class="tvd-tss-delete-group <#= parseInt(model.get('is_default')) === 1 ? 'tvd-disabled' : '' #>"  href="javascript:void(0)"><i class="tvd-icon-trash-o"></i></a>-->
+		<a class="tvd-tss-delete-group"  href="javascript:void(0)"><i class="tvd-icon-trash-o"></i></a>
+		<div class="tvd-tss-sep"></div>
+		<a class="tvd-tss-expand"  href="javascript:void(0)"><i class="tvd-icon-expanded"></i></a>
+	</div>
+</div>
+<ul class="tvd-tss-fields-wrapper"></ul>

@@ -3,7 +3,7 @@
 /*
 Plugin Name: Thrive Architect
 Plugin URI: http://www.thrivethemes.com
-Version: 2.1.12
+Version: 2.1.13
 Author: <a href="http://www.thrivethemes.com">Thrive Themes</a>
 Description: Live front end editor for your WordPress content
 */
@@ -855,6 +855,25 @@ function tve_update_checker() {
 		'',
 		'content_builder'
 	);
+	/**
+	 * Adding icon of the product for update-core page
+	 */
+	add_filter( 'puc_request_info_result-thrive-visual-editor', 'architect_set_product_icon' );
+}
+
+
+/**
+ * Adding the product icon for the update core page
+ *
+ * @param $info
+ *
+ * @return mixed
+ */
+
+function architect_set_product_icon( $info ) {
+	$info->icons['1x'] = tve_editor_css() . '/images/thrive-architect-logo.png';
+
+	return $info;
 }
 
 /**
