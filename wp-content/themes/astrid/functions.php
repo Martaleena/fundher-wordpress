@@ -437,7 +437,7 @@ function astrid_footer_credits() {
 		printf( __( 'Powered by %s', 'astrid' ), 'WordPress' );
 	echo '</a>';
 	echo '<span class="sep"> | </span>';
-	printf( __( 'Theme: %2$s by %1$s.', 'astrid' ), 'aThemes', '<a href="http://athemes.com/theme/astrid" rel="designer">Astrid</a>' );
+	printf( __( 'Theme: %2$s by %1$s.', 'astrid' ), 'aThemes', '<a href="http://athemes.com/theme/astrid" rel="nofollow">Astrid</a>' );
 }
 add_action( 'astrid_footer', 'astrid_footer_credits' );
 

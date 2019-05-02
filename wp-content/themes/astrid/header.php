@@ -18,6 +18,7 @@
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
 <?php wp_head(); ?>
+<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/157089da6ad7bf3a0e6aa8c43/85d17fac8eb0b9e620b97204c.js");</script>
 </head>
 
 <body <?php body_class(); ?>>
